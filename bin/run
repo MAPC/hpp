@@ -1,0 +1,22 @@
+#!/bin/bash
+
+PKG=hpp-app
+WORKDIR=/usr/src/app
+
+dir=$(dirname "$0")
+if [ "$dir" == "bin" ]; then
+    LOCAL="$(dirname "$PWD"/..)"
+else
+    LOCAL=$PWD
+fi
+
+xhost +local:docker
+
+docker run \
+    -it \
+    --rm \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v "$LOCAL":"$WORKDIR" \
+    -e DISPLAY="$DISPLAY" \
+    --name ${PKG}_dev \
+    ${PKG}
