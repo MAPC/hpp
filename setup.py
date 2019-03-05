@@ -3,10 +3,15 @@ from setuptools import setup
 setup(
     name     = 'hpp',
     version  = '0.0.0',
-    packages = ['src'],
+    packages = ['src', 'config'],
 
     install_requires = [
+        'munch',
+        'pandas',
         'pyqt5',
+        'python-dotenv',
+        'requests',
+        'xlsxwriter',
     ],
 
     entry_points = {

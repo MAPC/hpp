@@ -3,18 +3,17 @@ HPP: Housing Production Plan Tool
 """
 
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
+import config
 
 
 def main():
     app = QApplication([])
 
-    label = QLabel('Hello World!')
-
     layout = QVBoxLayout()
     layout.addWidget(QLabel('Hello World!'))
 
     window = QWidget()
-    window.setWindowTitle('HPP')
+    window.setWindowTitle(config.gui.TITLE)
     window.setLayout(layout)
     window.show()
 
