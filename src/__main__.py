@@ -2,22 +2,26 @@
 HPP: Housing Production Plan Tool
 """
 
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
-import config
+
+import sys
+from getopt import getopt
+
+
+from .gui import GUI
+from .data import Composer
+from .args import parse_args
 
 
 def main():
-    app = QApplication([])
+    composer = Composer()
+    args = parse_args(sys.argv[1:])
 
-    layout = QVBoxLayout()
-    layout.addWidget(QLabel('Hello World!'))
+    if args['headless']:
+        print("Hello world")
+    else:
+        gui = GUI(composer)
+        gui.start()
 
-    window = QWidget()
-    window.setWindowTitle(config.gui.TITLE)
-    window.setLayout(layout)
-    window.show()
-
-    app.exec_()
 
 
 if __name__ == '__main__':
