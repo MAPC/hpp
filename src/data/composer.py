@@ -9,3 +9,9 @@ class Composer(object):
 
     def __init__(self):
         self.datasets = []
+        self.munis = []
+
+
+    def fetch(self):
+        for dataset in self.datasets:
+            dataset.fetch()

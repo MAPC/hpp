@@ -15,7 +15,8 @@ def main():
     args = parse_args(sys.argv[1:])
 
     if args['headless']:
-        print("Hello world")
+        composer.munis = args.munis
+        composer.fetch()
     else:
         gui = GUI(composer)
         gui.launch()
