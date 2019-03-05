@@ -6,16 +6,17 @@ preparing them to be written to files.
 """
 
 from .dataset import Dataset
+from .datasets import data_constructors
 
 
 class Composer(object):
 
     def __init__(self):
-        dataset = Dataset('Average Household Size by Tenure')
-        dataset.table = 'tabular.b25010_avg_hhsize_by_tenure_acs_m'
+        self.datasets = []
 
-        self.datasets = [dataset]
-        #self.init_datasets()
+        for constructor in data_constructors:
+            self.datasets.append(constructor())    
+
 
     def fetch_all(self):
         for dataset in self.datasets:
