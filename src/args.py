@@ -3,7 +3,6 @@ HPP - Launch arguments
 """
 
 from getopt import getopt
-from pprint import pprint
 
 
 short_args = 'h'

@@ -15,8 +15,11 @@ def main():
     args = parse_args(sys.argv[1:])
 
     if args['headless']:
-        composer.munis = args.munis
-        composer.fetch()
+        for muni in args['munis']:
+            for dataset in composer.datasets:
+                dataset.add_condition(dataset.default_condition, muni)
+
+        composer.fetch_all()
     else:
         gui = GUI(composer)
         gui.launch()

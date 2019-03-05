@@ -2,8 +2,8 @@
 HPP Services - PrQL
 """
 
-import requests
 import config 
+import requests
 
 
 def prql(query):
@@ -13,5 +13,4 @@ def prql(query):
     }
 
     response = requests.get(config.prql.HOST, params=params)
-
     return response.json()
