@@ -9,7 +9,6 @@ from pprint import pprint
 short_args = 'h'
 long_args = ['headless']
 
-
 def parse_args(args):
     options = getopt(args, short_args, long_args)
 
@@ -21,7 +20,5 @@ def parse_args(args):
     for opt, arg in options[0]:
         if opt in ['-h', '--headless']:
             values['headless'] = True
-    
-    pprint(values)
 
     return values

@@ -2,10 +2,8 @@
 HPP: Housing Production Plan Tool
 """
 
-
 import sys
 from getopt import getopt
-
 
 from .gui import GUI
 from .data import Composer
@@ -20,8 +18,7 @@ def main():
         print("Hello world")
     else:
         gui = GUI(composer)
-        gui.start()
-
+        gui.launch()
 
 
 if __name__ == '__main__':

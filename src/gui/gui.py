@@ -22,6 +22,6 @@ class GUI(object):
         self.window = window
 
 
-    def start(self):
+    def launch(self):
         self.window.show()
         self.app.exec_()
