@@ -45,6 +45,9 @@ class Dataset(object):
 
 
     def add_condition(self, column, value):
+        if column == None:
+            column = self.default_condition
+
         if column in self.conditions:
             self.conditions[column].append(value)
         else:
