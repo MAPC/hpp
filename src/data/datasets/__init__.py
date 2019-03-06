@@ -7,7 +7,9 @@ function should be imported and added to the list of contructors.
 """
 
 from .avg_hhsize_by_tenure_acs_m import avg_hhsize_by_tenure_acs_m
+from .costburden_acs_m import costburden_acs_m
 
 data_constructors = [
     avg_hhsize_by_tenure_acs_m,
+    costburden_acs_m,
 ]
