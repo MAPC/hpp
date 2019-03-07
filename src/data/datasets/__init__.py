@@ -24,7 +24,7 @@ from .hous_projections_hh_by_age_m import hous_projections_hh_by_age_m
 from .hous_projections_hu_demand_by_age_m import hous_projections_hu_demand_by_age_m
 from .hous_res_sales_by_type_value_m import hous_res_sales_by_type_value_m
 from .hous_shi_m import hous_shi_m
-from .hu_tenure_year_build_units_acs_m import hu_tenure_year_build_units_acs_m
+from .hu_tenure_year_built_units_acs_m import hu_tenure_year_built_units_acs_m
 from .hu_units_in_structure_acs_m import hu_units_in_structure_acs_m
 from .mhi_fam_acs_m import mhi_fam_acs_m
 from .population_by_age_gender_acs_m import population_by_age_gender_acs_m
@@ -51,7 +51,7 @@ data_constructors = [
     hous_projections_hu_demand_by_age_m,
     hous_res_sales_by_type_value_m,
     hous_shi_m,
-    hu_tenure_year_build_units_acs_m,
+    hu_tenure_year_built_units_acs_m,
     hu_units_in_structure_acs_m,
     mhi_fam_acs_m,
     population_by_age_gender_acs_m,

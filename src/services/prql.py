@@ -13,4 +13,6 @@ def prql(query):
     }
 
     response = requests.get(config.prql.HOST, params=params)
+    response.raise_for_status()
+
     return response.json()

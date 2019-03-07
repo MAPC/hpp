@@ -20,7 +20,9 @@ class DataComposer(object):
 
     def fetch_all(self):
         for dataset in self.datasets:
-            dataset.fetch()
+            rows = dataset.fetch()
+
+            print("%s: %d" % (dataset.table, rows))
 
     def munge_all(self):
         for dataset in self.datasets:

@@ -6,6 +6,7 @@ interpreted by the rest of the program.
 """
 
 import pandas as pd
+from requests import HTTPError
 from ..services import prql
 
 
@@ -18,8 +19,10 @@ class Dataset(object):
 
         self.table = ''
         self.columns = ['*']
+        self.fetched = False
         self.conditions = {}
         self.default_condition = 'municipal'
+        self.accept_propogations = True
 
 
     def fetch(self):
@@ -37,11 +40,27 @@ class Dataset(object):
 
         columns = ', '.join(self.columns)
         query = query_template % (columns, self.table)
-        data = prql(query)
 
-        self.data = pd.DataFrame(data['rows'])
+        try:
+            data = prql(query)
+            self.data = pd.DataFrame(data['rows'])
+            self.length = len(self.data.index)
+        except HTTPError:
+            self.length = -1
 
-        return len(self.data.index)
+        self.fetched = True
+
+        return self.length
+
+
+    def is_ready_for_use(self):
+        if self.fetched == True:
+            if self.length < 0:
+                return False
+            else:
+                return True
+        else:
+            return False
 
 
     def add_condition(self, column, value):
