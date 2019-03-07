@@ -16,6 +16,6 @@ def hous_hh_type_size_by_seniors_m():
     dataset.munger = munger
     dataset.layout = layout
 
-    dataset.add_condition('years', '2010')
+    dataset.add_condition('years', 2010)
 
     return dataset

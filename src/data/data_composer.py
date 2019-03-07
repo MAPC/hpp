@@ -7,6 +7,7 @@ preparing them to be written to files.
 
 from .dataset import Dataset
 from .datasets import data_constructors
+from pprint import pprint
 
 
 class DataComposer(object):
@@ -19,10 +20,16 @@ class DataComposer(object):
 
 
     def fetch_all(self):
+        errors = []
+
         for dataset in self.datasets:
             rows = dataset.fetch()
 
-            print("%s: %d" % (dataset.table, rows))
+            ready, err = dataset.is_ready_for_use()
+            if not ready:
+                errors.append(err)
+
+        return errors
 
     def munge_all(self):
         for dataset in self.datasets:
@@ -31,5 +38,6 @@ class DataComposer(object):
 
     def propogate_condition(self, column, value):
         for dataset in self.datasets:
-            dataset.add_condition(column, value)
+            if dataset.accept_propogations:
+                dataset.add_condition(column, value)
 

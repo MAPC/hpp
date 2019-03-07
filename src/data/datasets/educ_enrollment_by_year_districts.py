@@ -15,5 +15,6 @@ def educ_enrollment_by_year_districts():
     dataset.table = 'tabular.educ_enrollment_by_year_districts'
     dataset.munger = munger
     dataset.layout = layout
+    dataset.accept_propogations = False
 
     return dataset

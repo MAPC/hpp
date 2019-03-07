@@ -6,8 +6,10 @@ interpreted by the rest of the program.
 """
 
 import pandas as pd
+from copy import deepcopy
 from requests import HTTPError
 from ..services import prql
+from pprint import pprint
 
 
 class Dataset(object):
@@ -19,48 +21,58 @@ class Dataset(object):
 
         self.table = ''
         self.columns = ['*']
-        self.fetched = False
+        self.fresh = False
         self.conditions = {}
+        self.previous_conditions = None
         self.default_condition = 'municipal'
         self.accept_propogations = True
 
+        self.errors = []
+
 
     def fetch(self):
-        query_template = "SELECT %s FROM %s"
+        if not self.is_fresh():
+            self.previous_conditions = deepcopy(self.conditions)
 
-        if len(self.conditions.keys()) > 0:
-            condition = ' WHERE '
+            query_template = "SELECT %s FROM %s"
 
-            clauses = []
-            for column, values in self.conditions.items():
-                for value in values:
-                    clauses.append("%s ILIKE '%s'" % (column, value))
+            if len(self.conditions.keys()) > 0:
+                condition = ' WHERE '
 
-            query_template = query_template + condition + ' OR '.join(clauses)
+                clauses = []
+                for column, values in self.conditions.items():
+                    for value in values:
+                        operator = '=' if type(value) == int else 'ILIKE'
+                        clauses.append("%s %s '%s'" % (column, operator, value))
 
-        columns = ', '.join(self.columns)
-        query = query_template % (columns, self.table)
+                query_template = query_template + condition + (' OR '.join(clauses))
 
-        try:
-            data = prql(query)
-            self.data = pd.DataFrame(data['rows'])
-            self.length = len(self.data.index)
-        except HTTPError:
-            self.length = -1
+            columns = ', '.join(self.columns)
+            query = query_template % (columns, self.table)
 
-        self.fetched = True
+            try:
+                data = prql.request(query)
+                self.data = pd.DataFrame(data['rows'])
+                self.length = len(self.data.index)
+            except prql.Error as err:
+                self.errors.append(err.response.text)
+                self.length = -1
 
         return self.length
 
 
+    def is_fresh(self):
+        return self.conditions == self.previous_conditions
+
+
     def is_ready_for_use(self):
-        if self.fetched == True:
+        if self.is_fresh():
             if self.length < 0:
-                return False
+                return False, self.errors[-1]
             else:
-                return True
+                return True, None
         else:
-            return False
+            return False, None
 
 
     def add_condition(self, column, value):
@@ -78,10 +90,6 @@ class Dataset(object):
             self.conditions.pop(column, None)
         else:
             self.conditions = {}
-
-
-    def set_munger(self, munger):
-        self.munger = munger
 
 
     def munge(self):

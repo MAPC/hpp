@@ -3,7 +3,7 @@ HPP: Housing Production Plan Tool
 """
 
 import sys
-from getopt import getopt
+from pprint import pprint
 
 from .gui import GUI
 from .data import DataComposer
@@ -20,6 +20,7 @@ def main():
 
         composer.fetch_all()
         composer.munge_all()
+
     else:
         gui = GUI(composer)
         gui.launch()
