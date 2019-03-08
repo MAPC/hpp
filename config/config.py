@@ -18,11 +18,16 @@ def getValue(key):
 
 # Config declarations
 
-prql = Munch({
-    'HOST': getValue('PRQL_HOST'),
-    'TOKEN': getValue('PRQL_TOKEN'),
+args = Munch({
+    'FORMAT': getValue('ARGS_FORMAT'),
+    'HEADLESS': getValue('ARGS_HEADLESS'),
 })
 
 gui = Munch({
     'TITLE': getValue('GUI_TITLE'),
+})
+
+prql = Munch({
+    'HOST': getValue('PRQL_HOST'),
+    'TOKEN': getValue('PRQL_TOKEN'),
 })
