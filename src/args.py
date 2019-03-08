@@ -34,7 +34,7 @@ def parse_args(args):
             if arg in formats.keys():
                 values['format'] = formats[arg]
             else:
-                print("WARNING: '%s' is not a valid format. Using ''." % (arg, values['format']))
+                print("WARNING: '%s' is not a valid format. Using '%s'." % (arg, values['format']))
             
 
     return values
