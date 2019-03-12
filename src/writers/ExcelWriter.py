@@ -8,7 +8,7 @@ to a .xlsx file.
 from .AbstractWriter import AbstractWriter
 
 
-def ExcelWriter(AbstractWriter):
+class ExcelWriter(AbstractWriter):
 
     def write(self):
         print('Writing Excel')

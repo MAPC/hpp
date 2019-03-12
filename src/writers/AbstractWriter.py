@@ -6,7 +6,7 @@ writing the contents of a DataComposer to a file.
 """
 
 
-def AbstractWriter(object):
+class AbstractWriter(object):
 
     def __init__(self, composer):
         self.composer = composer

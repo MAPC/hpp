@@ -8,7 +8,7 @@ to a .csv file.
 from .AbstractWriter import AbstractWriter
 
 
-def CSVWriter(AbstractWriter):
+class CSVWriter(AbstractWriter):
 
     def write(self):
         print('Writing CSV')
