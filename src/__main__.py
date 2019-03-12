@@ -3,11 +3,11 @@ HPP: Housing Production Plan Tool
 """
 
 import sys
-from pprint import pprint
 
 from .gui import GUI
 from .data import DataComposer
 from .args import parse_args
+from .writers import ExcelWriter, CSVWriter
 
 
 def main():
@@ -18,12 +18,18 @@ def main():
         for muni in args['munis']:
             composer.propogate_condition(None, muni)
 
-        composer.fetch_all()
-        composer.munge_all()
+        composer.compose()
+        
+        if args['format'] == 'csv':
+            writer = CSVWriter(composer)
+        else:
+            writer = ExcelWriter(composer)
+
+        return writer.write()
 
     else:
         gui = GUI(composer)
-        gui.launch()
+        return gui.launch()
 
 
 if __name__ == '__main__':

@@ -1,15 +1,13 @@
 """
 HPP - Dataset
 
-Datasets describe the way that data should be munged and
+A Dataset describes the way that data should be munged and
 interpreted by the rest of the program.
 """
 
 import pandas as pd
 from copy import deepcopy
-from requests import HTTPError
 from ..services import prql
-from pprint import pprint
 
 
 class Dataset(object):
