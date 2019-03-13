@@ -11,7 +11,7 @@ def hous_hh_income_by_hh_type_chas_m():
         pprint(worksheet)
 
 
-    dataset = Dataset('NEED TO FIND NAME: hous_hh_income_by_hh_type_chas_m')
+    dataset = Dataset('hous_hh_income_by_hh_type_chas_m')
     dataset.table = 'tabular.hous_hh_income_by_hh_type_chas_m'
     dataset.munger = munger
     dataset.layout = layout

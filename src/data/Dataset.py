@@ -14,13 +14,15 @@ class Dataset(object):
 
     def __init__(self, title = ''):
         self.title = title
-        self.data = []
+        self.data = pd.DataFrame()
         self.munger = None
+        self.layout = None
 
         self.table = ''
         self.columns = ['*']
         self.fresh = False
         self.conditions = {}
+        self.sort_by = []
         self.previous_conditions = None
         self.default_condition = 'municipal'
         self.accept_propogations = True
@@ -52,6 +54,11 @@ class Dataset(object):
                 data = prql.request(query)
                 self.data = pd.DataFrame(data['rows'])
                 self.length = len(self.data.index)
+
+                sort_by = self.sort_by if len(self.sort_by) > 0 else list(self.conditions.keys())
+                if len(sort_by) > 0:
+                    self.data.sort_values(by=sort_by, inplace=True)
+
             except prql.Error as err:
                 self.errors.append(err.response.text)
                 self.length = -1
@@ -88,6 +95,14 @@ class Dataset(object):
             self.conditions.pop(column, None)
         else:
             self.conditions = {}
+
+
+    def render_layout(self, writer):
+        if self.layout:
+            worksheet = writer.register(self.title, self.data)
+            self.layout(worksheet)
+        else:
+            raise Exception('No layout defined for %s' % (self.table))
 
 
     def munge(self):

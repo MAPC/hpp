@@ -11,7 +11,7 @@ def demo_race_ethnicity_m():
         pprint(worksheet)
 
 
-    dataset = Dataset('NEED TO FIND NAME: demo_race_ethnicity_m')
+    dataset = Dataset('demo_race_ethnicity_m')
     dataset.table = 'tabular.demo_race_ethnicity_m'
     dataset.munger = munger
     dataset.layout = layout
