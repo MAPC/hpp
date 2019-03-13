@@ -4,7 +4,7 @@ from pprint import pprint
 def hous_projections_hh_by_age_m():
 
     def munger(data):
-        pprint(data)
+        pass
 
     
     def layout(worksheet):

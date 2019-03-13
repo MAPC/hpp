@@ -16,11 +16,10 @@ class AbstractWriter(object):
 
         if not file_name:
             hash_len = 10
-            file_hash = "%0x" % getrandbits(hash_len * 4)
+            random_hash = "%0x" % getrandbits(hash_len * 4)
             now = datetime.now()
 
-            file_name = "hpp-%s-%s" % (now.strftime("%Y-%m-%d"), file_hash)
-            print(file_name)
+            file_name = "hpp-%s-%s" % (now.strftime("%Y-%m-%d"), random_hash)
 
         self.file_name = file_name
 
