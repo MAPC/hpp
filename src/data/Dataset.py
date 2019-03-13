@@ -33,22 +33,7 @@ class Dataset(object):
     def fetch(self):
         if not self.is_fresh():
             self.previous_conditions = deepcopy(self.conditions)
-
-            query_template = "SELECT %s FROM %s"
-
-            if len(self.conditions.keys()) > 0:
-                condition = ' WHERE '
-
-                clauses = []
-                for column, values in self.conditions.items():
-                    for value in values:
-                        operator = '=' if type(value) == int else 'ILIKE'
-                        clauses.append("%s %s '%s'" % (column, operator, value))
-
-                query_template = query_template + condition + (' OR '.join(clauses))
-
-            columns = ', '.join(self.columns)
-            query = query_template % (columns, self.table)
+            query = self.build_query()
 
             try:
                 data = prql.request(query)
@@ -64,6 +49,30 @@ class Dataset(object):
                 self.length = -1
 
         return self.length
+
+
+    def build_query(self):
+        query_template = "SELECT %s FROM %s"
+
+        if len(self.conditions.keys()) > 0:
+            condition = ' WHERE '
+
+            conditions = []
+            for column, values in self.conditions.items():
+                clauses = []
+
+                for value in values:
+                    operator = '=' if type(value) == int else 'ILIKE'
+                    clauses.append("%s %s '%s'" % (column, operator, value))
+
+                conditions.append(' OR '.join(clauses))
+
+            query_template = query_template + ' WHERE ' + ' AND '.join(conditions)
+
+        columns = ', '.join(self.columns)
+        query = query_template % (columns, self.table)
+
+        return query
 
 
     def is_fresh(self):
