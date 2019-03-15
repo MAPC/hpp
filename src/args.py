@@ -6,7 +6,6 @@ import config
 from getopt import getopt
 
 
-
 short_args = 'f:h'
 long_args = ['headless', 'format=']
 

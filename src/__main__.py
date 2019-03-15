@@ -4,10 +4,10 @@ HPP: Housing Production Plan Tool
 
 import sys
 
-from .gui import GUI
-from .data import DataComposer
-from .args import parse_args
-from .writers import ExcelWriter, CSVWriter
+from src.gui import GUI
+from src.data import DataComposer
+from src.args import parse_args
+from src.writers import ExcelWriter, CSVWriter
 
 
 def main():
