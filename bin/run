@@ -17,6 +17,8 @@ docker run \
     --rm \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v "$LOCAL":"$WORKDIR" \
+    -v "$LOCAL/bin":/opt/bin \
     -e DISPLAY="$DISPLAY" \
+    -e HPP_COMPILE="$HPP_COMPILE" \
     --name ${PKG}_dev \
     ${PKG}

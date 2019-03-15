@@ -9,6 +9,7 @@ setup(
         'munch',
         'pandas',
         'pyqt5',
+        'pyinstaller',
         'python-dotenv',
         'requests',
         'xlsxwriter',
