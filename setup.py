@@ -8,7 +8,6 @@ setup(
     install_requires = [
         'munch',
         'pandas',
-        'pyqt5',
         'python-dotenv',
         'requests',
         'xlsxwriter',

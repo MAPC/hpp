@@ -10,13 +10,12 @@ else
     LOCAL=$PWD
 fi
 
-xhost +local:docker
+source "$LOCAL/.env"
 
 docker run \
     -it \
     --rm \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v "$LOCAL":"$WORKDIR" \
-    -e DISPLAY="$DISPLAY" \
+    -p "$WEB_PORT:$WEB_PORT" \
     --name ${PKG}_dev \
     ${PKG}

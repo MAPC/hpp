@@ -4,7 +4,7 @@ HPP: Housing Production Plan Tool
 
 import sys
 
-from .gui import GUI
+from .web import Server
 from .data import DataComposer
 from .args import parse_args
 from .writers import ExcelWriter, CSVWriter
@@ -28,8 +28,8 @@ def main():
         return writer.write()
 
     else:
-        gui = GUI(composer)
-        return gui.launch()
+        server = Server(composer)
+        return server.serve()
 
 
 if __name__ == '__main__':

@@ -31,3 +31,7 @@ prql = Munch({
     'HOST': getValue('PRQL_HOST'),
     'TOKEN': getValue('PRQL_TOKEN'),
 })
+
+web = Munch({
+    'PORT': int(getValue('WEB_PORT'))
+})
