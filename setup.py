@@ -6,6 +6,7 @@ setup(
     packages = ['src', 'config'],
 
     install_requires = [
+        'jinja2',
         'munch',
         'pandas',
         'python-dotenv',
