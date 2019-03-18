@@ -17,9 +17,6 @@ class Server(object):
         self.composer = composer
         self.handler = Handler
 
-        os.chdir('src/web/static')
-
-
     def serve(self):
         with TCPServer(("", config.web.PORT), self.handler) as httpd:
             return httpd.serve_forever()
