@@ -11,14 +11,11 @@ from .writers import ExcelWriter, CSVWriter
 
 
 def main():
-    composer = DataComposer()
     args = parse_args(sys.argv[1:])
 
     if args['headless']:
-        for muni in args['munis']:
-            composer.propogate_condition(None, muni)
-
-        composer.compose()
+        composer = DataComposer()
+        composer.compose(args['munis'])
         
         if args['format'] == 'csv':
             writer = CSVWriter(composer)
@@ -28,7 +25,7 @@ def main():
         return writer.write()
 
     else:
-        server = Server(composer)
+        server = Server()
         return server.serve()
 
 

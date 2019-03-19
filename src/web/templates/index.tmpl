@@ -9,7 +9,23 @@
 </head>
 <body>
     <form method="POST">
-        <input name="munis" type="text">
+        <select name="munis[]" multiple>
+            {% for muni in munis %}
+                <option value="{{muni}}">{{muni}}</option>
+            {% endfor %}
+        </select>
+
+        <select name="tables[]" multiple>
+            {% for table in tables %}
+                <option value="{{table}}">{{table}}</option>
+            {% endfor %}
+        </select>
+
+        <select name="format">
+            {% for format in formats %}
+                <option value="{{format}}">{{format}}</option>
+            {% endfor %}
+        </select>
 
         <button type="submit">SUBMIT</button>
     </form>

@@ -4,7 +4,6 @@ HPP Web - Server
 The class that manages the server lifecycle.
 """
 
-import os
 import config
 from socketserver import TCPServer
 
@@ -13,8 +12,7 @@ from .Handler import Handler
 
 class Server(object):
 
-    def __init__(self, composer):
-        self.composer = composer
+    def __init__(self):
         self.handler = Handler
 
     def serve(self):

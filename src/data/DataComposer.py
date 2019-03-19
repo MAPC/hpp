@@ -19,22 +19,34 @@ class DataComposer(object):
             self.datasets.append(constructor())    
 
 
-    def compose(self):
-        fetch_errors = self.fetch_all() 
+    def compose(self, munis, tables = None):
+        for muni in munis:
+            composer.propogate_condition(None, muni)
+
+        fetch_errors = []
+        if tables != None:
+            for table in tables: 
+                dataset = [dataset for dataset in self.datasets if dataset.title == table]
+                self.fetch(dataset)
+                dataset.munge()
+        else:
+            fetch_errors = self.fetch_all()
+            self.munge_all()
 
         if len(fetch_errors) > 0:
             pprint(fetch_errors)
 
-        self.munge_all()
+
+    def fetch(self, dataset):
+        rows = dataset.fetch()
+        return dataset.is_ready_for_use()
 
 
     def fetch_all(self):
         errors = []
 
         for dataset in self.datasets:
-            rows = dataset.fetch()
-
-            ready, err = dataset.is_ready_for_use()
+            ready, err = self.fetch(dataset)
             if not ready:
                 errors.append(err)
 
@@ -50,4 +62,3 @@ class DataComposer(object):
         for dataset in self.datasets:
             if dataset.accept_propogations:
                 dataset.add_condition(column, value)
-
