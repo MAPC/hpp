@@ -15,7 +15,7 @@ def main():
 
     if args['headless']:
         composer = DataComposer()
-        composer.compose(args['munis'])
+        composer.compose(args['munis'], args['tables'])
         
         if args['format'] == 'csv':
             writer = CSVWriter(composer)

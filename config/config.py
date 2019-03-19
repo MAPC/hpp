@@ -21,6 +21,8 @@ def getValue(key):
 args = Munch({
     'FORMAT': getValue('ARGS_FORMAT'),
     'HEADLESS': getValue('ARGS_HEADLESS'),
+    'MUNIS': getValue('ARGS_MUNIS'),
+    'TABLES': getValue('ARGS_TABLES'),
 })
 
 gui = Munch({
