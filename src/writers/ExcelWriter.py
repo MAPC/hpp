@@ -16,7 +16,7 @@ class ExcelWriter(AbstractWriter):
     file_ext = 'xlsx'
 
     def write(self):
-        self._writer = pd.ExcelWriter(self.get_output_path(), engine='xlsxwriter')
+        self._writer = pd.ExcelWriter('%s.%s' % (self.get_output_path(), self.file_ext), engine='xlsxwriter')
 
         for dataset in self.composer.datasets:
             dataset.render_layout(self)

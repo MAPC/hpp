@@ -32,7 +32,7 @@ class AbstractWriter(object):
 
 
     def get_output_path(self):
-        return path.join(self.output_dir, self.get_file())
+        return path.join(self.output_dir, self.file_name)
 
 
     def write(self):
