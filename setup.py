@@ -6,9 +6,9 @@ setup(
     packages = ['src', 'config'],
 
     install_requires = [
+        'jinja2',
         'munch',
         'pandas',
-        'pyqt5',
         'python-dotenv',
         'requests',
         'xlsxwriter',

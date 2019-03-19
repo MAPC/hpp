@@ -21,6 +21,8 @@ def getValue(key):
 args = Munch({
     'FORMAT': getValue('ARGS_FORMAT'),
     'HEADLESS': getValue('ARGS_HEADLESS'),
+    'MUNIS': getValue('ARGS_MUNIS'),
+    'TABLES': getValue('ARGS_TABLES'),
 })
 
 gui = Munch({
@@ -30,4 +32,8 @@ gui = Munch({
 prql = Munch({
     'HOST': getValue('PRQL_HOST'),
     'TOKEN': getValue('PRQL_TOKEN'),
+})
+
+web = Munch({
+    'PORT': int(getValue('WEB_PORT'))
 })

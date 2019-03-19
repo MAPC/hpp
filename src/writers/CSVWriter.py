@@ -14,6 +14,8 @@ from .AbstractWriter import AbstractWriter
 
 class CSVWriter(AbstractWriter):
 
+    file_ext = 'zip'
+
     def write(self):
         workdir = path.join(gettempdir(), self.file_name)
 
@@ -27,7 +29,7 @@ class CSVWriter(AbstractWriter):
             file_path = path.join(workdir, "%s.csv" % dataset.table)
             dataset.data.to_csv(file_path, index=False)
 
-        make_archive(self.file_name, 'zip', workdir)  
+        make_archive(self.get_output_path(), self.file_ext, workdir)  
 
         try:
             rmtree(workdir)

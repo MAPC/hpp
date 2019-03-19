@@ -6,7 +6,6 @@ import config
 from getopt import getopt
 
 
-
 short_args = 'f:h'
 long_args = ['headless', 'format=']
 
@@ -16,7 +15,8 @@ def parse_args(args):
     values = {
         'format': config.args.FORMAT,
         'headless': config.args.HEADLESS,
-        'munis': options[1]
+        'tables': config.args.TABLES,
+        'munis': config.args.MUNIS if config.args.MUNIS else options[1]
     }
 
     for opt, arg in options[0]:

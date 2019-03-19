@@ -5,4 +5,4 @@ When creating a new top-level config, make sure to expose
 the new config by appending to the import list below.
 """
 
-from .config import args, gui, prql
+from .config import args, gui, prql, web

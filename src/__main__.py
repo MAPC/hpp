@@ -4,21 +4,18 @@ HPP: Housing Production Plan Tool
 
 import sys
 
-from .gui import GUI
+from .web import Server
 from .data import DataComposer
 from .args import parse_args
 from .writers import ExcelWriter, CSVWriter
 
 
 def main():
-    composer = DataComposer()
     args = parse_args(sys.argv[1:])
 
     if args['headless']:
-        for muni in args['munis']:
-            composer.propogate_condition(None, muni)
-
-        composer.compose()
+        composer = DataComposer()
+        composer.compose(args['munis'], args['tables'])
         
         if args['format'] == 'csv':
             writer = CSVWriter(composer)
@@ -28,8 +25,8 @@ def main():
         return writer.write()
 
     else:
-        gui = GUI(composer)
-        return gui.launch()
+        server = Server()
+        return server.serve()
 
 
 if __name__ == '__main__':
