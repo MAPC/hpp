@@ -9,13 +9,13 @@
 </head>
 <body>
     <form method="POST">
-        <select name="munis[]" multiple>
+        <select name="munis" multiple>
             {% for muni in munis %}
                 <option value="{{muni}}">{{muni}}</option>
             {% endfor %}
         </select>
 
-        <select name="tables[]" multiple>
+        <select name="tables" multiple>
             {% for table in tables %}
                 <option value="{{table}}">{{table}}</option>
             {% endfor %}

@@ -14,7 +14,6 @@ class AbstractWriter(object):
 
     output_dir = 'src/web/compositions'
 
-
     def __init__(self, composer, file_name = None):
         self.composer = composer
 
@@ -28,8 +27,12 @@ class AbstractWriter(object):
         self.file_name = file_name
 
 
+    def get_file(self):
+        return "%s.%s" % (self.file_name, self.file_ext)
+
+
     def get_output_path(self):
-        return path.join(self.output_dir, self.file_name)
+        return path.join(self.output_dir, self.get_file())
 
 
     def write(self):

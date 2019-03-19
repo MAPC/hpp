@@ -13,8 +13,10 @@ from .AbstractWriter import AbstractWriter
 
 class ExcelWriter(AbstractWriter):
 
+    file_ext = 'xlsx'
+
     def write(self):
-        self._writer = pd.ExcelWriter('%s.xlsx' % self.get_output_path(), engine='xlsxwriter')
+        self._writer = pd.ExcelWriter(self.get_output_path(), engine='xlsxwriter')
 
         for dataset in self.composer.datasets:
             dataset.render_layout(self)

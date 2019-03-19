@@ -21,12 +21,12 @@ class DataComposer(object):
 
     def compose(self, munis, tables = None):
         for muni in munis:
-            composer.propogate_condition(None, muni)
+            self.propogate_condition(None, muni)
 
         fetch_errors = []
         if tables != None:
             for table in tables: 
-                dataset = [dataset for dataset in self.datasets if dataset.title == table]
+                dataset = [dataset for dataset in self.datasets if dataset.title == table][0]
                 self.fetch(dataset)
                 dataset.munge()
         else:
