@@ -49,7 +49,11 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         body = self.parse_body()
-        pprint(body)
+
+        if not 'munis' in body or not 'tables' in body:
+            self.reload()
+            return
+
         self.composer.compose(body['munis'], body['tables'])
 
         writer = self.formatWriters[body['format']](self.composer)
