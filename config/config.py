@@ -18,10 +18,14 @@ def getValue(key):
 
 # Config declarations
 
+MUNIS = getValue('ARGS_MUNIS')
+if MUNIS:
+    MUNIS = [muni.strip() for muni in MUNIS.split(',')]
+
 args = Munch({
     'FORMAT': getValue('ARGS_FORMAT'),
     'HEADLESS': getValue('ARGS_HEADLESS'),
-    'MUNIS': getValue('ARGS_MUNIS'),
+    'MUNIS': MUNIS,
     'TABLES': getValue('ARGS_TABLES'),
 })
 

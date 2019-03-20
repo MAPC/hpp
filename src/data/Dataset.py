@@ -5,8 +5,10 @@ A Dataset describes the way that data should be munged and
 interpreted by the rest of the program.
 """
 
+from pprint import pprint
 import pandas as pd
 from copy import deepcopy
+
 from ..services import prql
 
 
@@ -65,7 +67,7 @@ class Dataset(object):
                     operator = '=' if type(value) == int else 'ILIKE'
                     clauses.append("%s %s '%s'" % (column, operator, value))
 
-                conditions.append(' OR '.join(clauses))
+                conditions.append('(%s)' % ' OR '.join(clauses))
 
             query_template = query_template + ' WHERE ' + ' AND '.join(conditions)
 
