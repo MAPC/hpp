@@ -22,10 +22,9 @@ class Dataset(object):
 
         self.table = ''
         self.columns = ['*']
-        self.fresh = False
+        self.length = -1
         self.conditions = {}
         self.sort_by = []
-        self.previous_conditions = None
         self.default_condition = 'municipal'
         self.accept_propogations = True
 
@@ -33,22 +32,19 @@ class Dataset(object):
 
 
     def fetch(self):
-        if not self.is_fresh():
-            self.previous_conditions = deepcopy(self.conditions)
-            query = self.build_query()
+        query = self.build_query()
 
-            try:
-                data = prql.request(query)
-                self.data = pd.DataFrame(data['rows'])
-                self.length = len(self.data.index)
+        try:
+            data = prql.request(query)
+            self.data = pd.DataFrame(data['rows'])
+            self.length = len(self.data.index)
 
-                sort_by = self.sort_by if len(self.sort_by) > 0 else list(self.conditions.keys())
-                if len(sort_by) > 0 and set(sort_by).issubset(self.data.columns):
-                    self.data.sort_values(by=sort_by, inplace=True)
+            sort_by = self.sort_by if len(self.sort_by) > 0 else list(self.conditions.keys())
+            if len(sort_by) > 0 and set(sort_by).issubset(self.data.columns):
+                self.data.sort_values(by=sort_by, inplace=True)
 
-            except prql.Error as err:
-                self.errors.append(err.response.text)
-                self.length = -1
+        except prql.Error as err:
+            self.errors.append(err.response.text)
 
         return self.length
 
@@ -77,18 +73,11 @@ class Dataset(object):
         return query
 
 
-    def is_fresh(self):
-        return self.conditions == self.previous_conditions
-
-
     def is_ready_for_use(self):
-        if self.is_fresh():
-            if self.length < 0:
-                return False, self.errors[-1]
-            else:
-                return True, None
+        if self.length < 0:
+            return False, self.errors[-1]
         else:
-            return False, None
+            return True, None
 
 
     def add_condition(self, column, value):
