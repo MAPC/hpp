@@ -41,7 +41,7 @@ class Dataset(object):
                 self.length = len(self.data.index)
 
                 sort_by = self.sort_by if len(self.sort_by) > 0 else list(self.conditions.keys())
-                if len(sort_by) > 0:
+                if len(sort_by) > 0 and set(sort_by).issubset(self.data.columns):
                     self.data.sort_values(by=sort_by, inplace=True)
 
             except prql.Error as err:

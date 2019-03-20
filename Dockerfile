@@ -2,6 +2,7 @@ FROM python:3.7.2-stretch
 MAINTAINER Eric Youngberg <eyoungberg@mapc.org>
 
 WORKDIR /usr/src/app
+VOLUME /usr/src/app
 
 COPY ./ .
 
