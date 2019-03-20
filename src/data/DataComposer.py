@@ -14,6 +14,7 @@ class DataComposer(object):
 
     def __init__(self):
         self.datasets = []
+        self.composed_datasets = []
 
         for constructor in data_constructors:
             self.datasets.append(constructor())    
@@ -39,6 +40,7 @@ class DataComposer(object):
 
     def fetch(self, dataset):
         rows = dataset.fetch()
+        self.composed_datasets.append(dataset)
         return dataset.is_ready_for_use()
 
 

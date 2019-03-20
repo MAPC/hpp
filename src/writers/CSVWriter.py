@@ -25,7 +25,7 @@ class CSVWriter(AbstractWriter):
             print("Could not create directory %s" % workdir)
             return
 
-        for dataset in self.composer.datasets:
+        for dataset in self.composer.composed_datasets:
             file_path = path.join(workdir, "%s.csv" % dataset.table)
             dataset.data.to_csv(file_path, index=False)
 
