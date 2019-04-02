@@ -56,7 +56,7 @@ class Handler(SimpleHTTPRequestHandler):
 
         self.composer.compose(body['munis'], body['tables'])
 
-        writer = self.formatWriters[body['format']](self.composer)
+        writer = self.formatWriters[body['format']](self.composer, include_metadata=body['include_metadata'])
         writer.write()
 
         file_data = load_file('compositions', writer.get_file())

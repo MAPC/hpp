@@ -14,8 +14,9 @@ class AbstractWriter(object):
 
     output_dir = 'src/web/compositions'
 
-    def __init__(self, composer, file_name = None):
+    def __init__(self, composer, file_name = None, include_metadata = False):
         self.composer = composer
+        self.include_metadata = include_metadata
 
         if not file_name:
             hash_len = 10
