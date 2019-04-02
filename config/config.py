@@ -25,12 +25,9 @@ if MUNIS:
 args = Munch({
     'FORMAT': getValue('ARGS_FORMAT'),
     'HEADLESS': getValue('ARGS_HEADLESS'),
+    'INCLUDE_METADATA': getValue('ARGS_INCLUDE_METADATA'),
     'MUNIS': MUNIS,
     'TABLES': getValue('ARGS_TABLES'),
-})
-
-gui = Munch({
-    'TITLE': getValue('GUI_TITLE'),
 })
 
 prql = Munch({
