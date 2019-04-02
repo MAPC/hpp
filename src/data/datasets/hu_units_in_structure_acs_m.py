@@ -12,7 +12,7 @@ def hu_units_in_structure_acs_m():
 
 
     dataset = Dataset('Housing Units in a Structure')
-    dataset.table = 'tabular.b25024_hu_units_in_structure_acs_m'
+    dataset.table = 'b25024_hu_units_in_structure_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

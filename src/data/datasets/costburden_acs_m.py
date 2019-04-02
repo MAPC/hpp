@@ -12,7 +12,7 @@ def costburden_acs_m():
 
 
     dataset = Dataset('Cost Burdened Households')
-    dataset.table = 'tabular.b25091_b25070_costburden_acs_m'
+    dataset.table = 'b25091_b25070_costburden_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

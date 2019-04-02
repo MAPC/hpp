@@ -12,7 +12,7 @@ def poverty_by_hh_type_acs_m():
 
 
     dataset = Dataset('Households in Poverty by Household Type')
-    dataset.table = 'tabular.b17017_poverty_by_hh_type_acs_m'
+    dataset.table = 'b17017_poverty_by_hh_type_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

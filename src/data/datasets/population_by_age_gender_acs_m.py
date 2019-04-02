@@ -12,7 +12,7 @@ def population_by_age_gender_acs_m():
 
 
     dataset = Dataset('Population by Age and Gender')
-    dataset.table = 'tabular.b01001_population_by_age_gender_acs_m'
+    dataset.table = 'b01001_population_by_age_gender_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

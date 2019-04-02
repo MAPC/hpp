@@ -12,7 +12,7 @@ def hous_shi_m():
 
 
     dataset = Dataset('Subsidized Housing Inventory')
-    dataset.table = 'tabular.hous_shi_m'
+    dataset.table = 'hous_shi_m'
     dataset.munger = munger
     dataset.layout = layout
 

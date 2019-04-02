@@ -10,7 +10,7 @@ def avg_hhsize_by_tenure_acs_m():
         pass
 
     dataset = Dataset('Average Household Size by Tenure')
-    dataset.table = 'tabular.b25010_avg_hhsize_by_tenure_acs_m'
+    dataset.table = 'b25010_avg_hhsize_by_tenure_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

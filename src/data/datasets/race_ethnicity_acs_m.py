@@ -12,7 +12,7 @@ def race_ethnicity_acs_m():
 
 
     dataset = Dataset('Race and Ethnicity Estimates')
-    dataset.table = 'tabular.b03002_race_ethnicity_acs_m'
+    dataset.table = 'b03002_race_ethnicity_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

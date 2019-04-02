@@ -12,7 +12,7 @@ def hous_housing_units_90_10_m():
 
 
     dataset = Dataset('hous_housing_units_90_10_m')
-    dataset.table = 'tabular.hous_housing_units_90_10_m'
+    dataset.table = 'hous_housing_units_90_10_m'
     dataset.munger = munger
     dataset.layout = layout
 

@@ -12,7 +12,7 @@ def hous_hh_type_size_by_seniors_m():
 
 
     dataset = Dataset('Household Type and Size by Presence of Seniors')
-    dataset.table = 'tabular.hous_hh_type_size_by_seniors_m'
+    dataset.table = 'hous_hh_type_size_by_seniors_m'
     dataset.munger = munger
     dataset.layout = layout
 

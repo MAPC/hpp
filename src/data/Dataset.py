@@ -17,6 +17,7 @@ class Dataset(object):
     def __init__(self, title = ''):
         self.title = title
         self.data = pd.DataFrame()
+        self.metadata = {}
         self.munger = None
         self.layout = None
 
@@ -49,8 +50,21 @@ class Dataset(object):
         return self.length
 
 
+    def fetch_metadata(self):
+        try:
+            metadata = prql.request('SELECT alias, name FROM metadata.%s' % self.table)
+
+            for row in metadata['rows']:
+                self.metadata[row['name']] = row['alias']
+
+        except prql.Error as err:
+            self.errors.append(err.response.text)
+
+        return len(self.metadata.keys())
+
+
     def build_query(self):
-        query_template = "SELECT %s FROM %s"
+        query_template = "SELECT %s FROM tabular.%s"
 
         if len(self.conditions.keys()) > 0:
             condition = ' WHERE '

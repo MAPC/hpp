@@ -12,7 +12,7 @@ def demo_projections_pop_m():
 
 
     dataset = Dataset('demo_projections_pop_m')
-    dataset.table = 'tabular.demo_projections_pop_m'
+    dataset.table = 'demo_projections_pop_m'
     dataset.munger = munger
     dataset.layout = layout
 
