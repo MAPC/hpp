@@ -113,8 +113,12 @@ class Dataset(object):
 
     def render_layout(self, writer):
         if self.layout:
+            if len(self.metadata.keys()) > 0:
+                self.data.rename(columns=self.metadata, inplace=True)
+
             worksheet = writer.register(self.title, self.data)
             self.layout(worksheet)
+
         else:
             raise Exception('No layout defined for %s' % (self.table))
 

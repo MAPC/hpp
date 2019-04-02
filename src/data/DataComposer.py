@@ -41,7 +41,6 @@ class DataComposer(object):
     def fetch(self, dataset):
         dataset.fetch()
         dataset.fetch_metadata()
-        pprint(dataset.metadata)
         self.composed_datasets.append(dataset)
 
         return dataset.is_ready_for_use()
