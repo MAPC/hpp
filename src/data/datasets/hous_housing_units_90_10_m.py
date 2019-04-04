@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def hous_housing_units_90_10_m():
 
@@ -8,7 +7,7 @@ def hous_housing_units_90_10_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('hous_housing_units_90_10_m')

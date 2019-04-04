@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def mhi_fam_acs_m():
 
@@ -8,7 +7,7 @@ def mhi_fam_acs_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Median Household Income by Family Type')

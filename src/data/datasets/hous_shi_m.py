@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def hous_shi_m():
 
@@ -8,7 +7,7 @@ def hous_shi_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Subsidized Housing Inventory')

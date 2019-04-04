@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def demo_projections_pop_m():
 
@@ -8,7 +7,7 @@ def demo_projections_pop_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('demo_projections_pop_m')

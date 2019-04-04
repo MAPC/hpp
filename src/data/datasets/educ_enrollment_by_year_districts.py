@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def educ_enrollment_by_year_districts():
 
@@ -8,7 +7,7 @@ def educ_enrollment_by_year_districts():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Enrollment by School Year')

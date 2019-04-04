@@ -7,7 +7,6 @@ to a .xlsx file.
 
 import config
 import pandas as pd
-from pprint import pprint
 from .abbreviate import abbreviate
 from .AbstractWriter import AbstractWriter
 
@@ -41,8 +40,6 @@ class ExcelWriter(AbstractWriter):
             name = abbreviate(name, 31).title()
 
         df.to_excel(self._writer, name, index=False)
-
-        pprint(name)
 
         return expand_columns(self._writer.sheets[name], df)
 

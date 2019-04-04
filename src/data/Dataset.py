@@ -5,7 +5,6 @@ A Dataset describes the way that data should be munged and
 interpreted by the rest of the program.
 """
 
-from pprint import pprint
 import pandas as pd
 from copy import deepcopy
 
@@ -111,6 +110,14 @@ class Dataset(object):
             self.conditions = {}
 
 
+    def get_formatted_metadata(self):
+        meta_df = pd.DataFrame(self.metadata.values())
+        meta_df = meta_df[['name', 'alias', 'details']]
+        meta_df.rename(columns={'name': 'Name', 'alias': 'Alias', 'details': 'Details'}, inplace=True)
+
+        return meta_df
+
+
     def render_layout(self, writer):
         if self.layout:
             if len(self.metadata.keys()) > 0:
@@ -121,10 +128,7 @@ class Dataset(object):
                 self.data.rename(columns=metadata_cols, inplace=True)
 
                 if writer.include_metadata:
-                    meta_df = pd.DataFrame(self.metadata.values())
-                    meta_df = meta_df[['name', 'alias', 'details']]
-                    meta_df.rename(columns={'name': 'Name', 'alias': 'Alias', 'details': 'Details'}, inplace=True)
-
+                    meta_df = self.get_formatted_metadata()
                     writer.deferred_register('META %s' % self.title, meta_df)
 
             worksheet = writer.register(self.title, self.data)

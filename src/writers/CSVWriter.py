@@ -29,6 +29,11 @@ class CSVWriter(AbstractWriter):
             file_path = path.join(workdir, "%s.csv" % dataset.table)
             dataset.data.to_csv(file_path, index=False)
 
+            if self.include_metadata:
+                metadata = dataset.get_formatted_metadata()
+                meta_path = path.join(workdir, 'meta_%s.csv' % dataset.table)
+                metadata.to_csv(meta_path, index=False)
+
         make_archive(self.get_output_path(), self.file_ext, workdir)  
 
         try:

@@ -2,7 +2,7 @@
 HPP Configuration - Config declarations
 
 When creating a new config declaration, make sure to expose the new 
-declaration by appending it to the import list at the package root.
+declaration by appending it to the import list at the config package root.
 """
 
 from os import environ
@@ -12,37 +12,39 @@ from .defaults import DEFAULTS
 
 load_dotenv(find_dotenv())
 
-def getValue(key):
+
+def get_value(key):
     return environ.get(key, DEFAULTS.get(key))
+
+def parse_bool(val):
+    return bool(str(val).lower() in ('true', 'yes', 't', '1'))
+
+def strip_list(val):
+    if val:
+        return [x.strip() for x in str(val).split(',')]
+    else:
+        return val
 
 
 # Config declarations
 
-MUNIS = getValue('ARGS_MUNIS')
-if MUNIS:
-    MUNIS = [muni.strip() for muni in MUNIS.split(',')]
-
-TABLES = getValue('ARGS_TABLES')
-if TABLES:
-    TABLES = [table.strip() for table in TABLES.split(',')]
-
 args = Munch({
-    'FORMAT': getValue('ARGS_FORMAT'),
-    'HEADLESS': getValue('ARGS_HEADLESS'),
-    'INCLUDE_METADATA': getValue('ARGS_INCLUDE_METADATA'),
-    'MUNIS': MUNIS,
-    'TABLES': TABLES,
+    'FORMAT': get_value('ARGS_FORMAT'),
+    'HEADLESS': parse_bool(get_value('ARGS_HEADLESS')),
+    'INCLUDE_METADATA': parse_bool(get_value('ARGS_INCLUDE_METADATA')),
+    'MUNIS': strip_list(get_value('ARGS_MUNIS')),
+    'TABLES': strip_list(get_value('ARGS_TABLES')),
 })
 
 excel = Munch({
-    'MAX_COL_WIDTH': int(getValue('EXCEL_MAX_COL_WIDTH')),
+    'MAX_COL_WIDTH': int(get_value('EXCEL_MAX_COL_WIDTH')),
 })
 
 prql = Munch({
-    'HOST': getValue('PRQL_HOST'),
-    'TOKEN': getValue('PRQL_TOKEN'),
+    'HOST': get_value('PRQL_HOST'),
+    'TOKEN': get_value('PRQL_TOKEN'),
 })
 
 web = Munch({
-    'PORT': int(getValue('WEB_PORT')),
+    'PORT': int(get_value('WEB_PORT')),
 })

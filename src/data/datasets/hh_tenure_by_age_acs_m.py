@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def hh_tenure_by_age_acs_m():
 
@@ -8,7 +7,7 @@ def hh_tenure_by_age_acs_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Household Tenure by Age')

@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def hous_hh_type_by_cb_chas_m():
 
@@ -8,7 +7,7 @@ def hous_hh_type_by_cb_chas_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Household Type by Cost Burden Status')

@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def race_ethnicity_acs_m():
 
@@ -8,7 +7,7 @@ def race_ethnicity_acs_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Race and Ethnicity Estimates')

@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def population_by_age_gender_acs_m():
 
@@ -8,7 +7,7 @@ def population_by_age_gender_acs_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Population by Age and Gender')

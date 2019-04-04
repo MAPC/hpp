@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def hh_with_seniors_acs_m():
 
@@ -8,7 +7,7 @@ def hh_with_seniors_acs_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Households with Seniors')
