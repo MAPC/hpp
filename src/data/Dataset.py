@@ -52,10 +52,10 @@ class Dataset(object):
 
     def fetch_metadata(self):
         try:
-            metadata = prql.request('SELECT alias, name FROM metadata.%s' % self.table)
+            metadata = prql.request('SELECT alias, name, details FROM metadata.%s' % self.table)
 
             for row in metadata['rows']:
-                self.metadata[row['name']] = row['alias']
+                self.metadata[row['name']] = row
 
         except prql.Error as err:
             self.errors.append(err.response.text)
@@ -114,7 +114,18 @@ class Dataset(object):
     def render_layout(self, writer):
         if self.layout:
             if len(self.metadata.keys()) > 0:
-                self.data.rename(columns=self.metadata, inplace=True)
+                metadata_cols = {}
+                for name, meta in self.metadata.items():
+                    metadata_cols[name] = meta['alias']
+
+                self.data.rename(columns=metadata_cols, inplace=True)
+
+                if writer.include_metadata:
+                    meta_df = pd.DataFrame(self.metadata.values())
+                    meta_df = meta_df[['name', 'alias', 'details']]
+                    meta_df.rename(columns={'name': 'Name', 'alias': 'Alias', 'details': 'Details'}, inplace=True)
+
+                    writer.deferred_register('META %s' % self.title, meta_df)
 
             worksheet = writer.register(self.title, self.data)
             self.layout(worksheet)

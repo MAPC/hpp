@@ -22,12 +22,20 @@ MUNIS = getValue('ARGS_MUNIS')
 if MUNIS:
     MUNIS = [muni.strip() for muni in MUNIS.split(',')]
 
+TABLES = getValue('ARGS_TABLES')
+if TABLES:
+    TABLES = [table.strip() for table in TABLES.split(',')]
+
 args = Munch({
     'FORMAT': getValue('ARGS_FORMAT'),
     'HEADLESS': getValue('ARGS_HEADLESS'),
     'INCLUDE_METADATA': getValue('ARGS_INCLUDE_METADATA'),
     'MUNIS': MUNIS,
-    'TABLES': getValue('ARGS_TABLES'),
+    'TABLES': TABLES,
+})
+
+excel = Munch({
+    'MAX_COL_WIDTH': int(getValue('EXCEL_MAX_COL_WIDTH')),
 })
 
 prql = Munch({
@@ -36,5 +44,5 @@ prql = Munch({
 })
 
 web = Munch({
-    'PORT': int(getValue('WEB_PORT'))
+    'PORT': int(getValue('WEB_PORT')),
 })

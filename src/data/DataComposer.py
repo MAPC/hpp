@@ -27,9 +27,14 @@ class DataComposer(object):
         fetch_errors = []
         if tables != None:
             for table in tables: 
-                dataset = [dataset for dataset in self.datasets if dataset.title == table][0]
-                self.fetch(dataset)
-                dataset.munge()
+                dataset = [dataset for dataset in self.datasets if dataset.title == table]
+
+                if len(dataset) > 0:
+                    dataset = dataset[0]
+                    self.fetch(dataset)
+                    dataset.munge()
+                else:
+                    fetch_errors.append("Couldn't find table %s" % table)
         else:
             fetch_errors = self.fetch_all()
             self.munge_all()

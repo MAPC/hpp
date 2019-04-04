@@ -19,14 +19,11 @@ class AbstractWriter(object):
         self.composer = composer
         self.include_metadata = include_metadata
 
-        if not file_name:
-            hash_len = 10
-            random_hash = "%0x" % getrandbits(hash_len * 4)
-            now = datetime.now()
+        hash_len = 10
+        random_hash = "%0x" % getrandbits(hash_len * 4)
+        now = datetime.now()
 
-            file_name = "hpp-%s-%s" % (now.strftime("%Y-%m-%d"), random_hash)
-
-        self.file_name = file_name
+        self.file_name = "hpp-%s-%s" % (now.strftime("%Y-%m-%d"), random_hash)
 
 
     def get_file(self):
