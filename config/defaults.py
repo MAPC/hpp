@@ -3,7 +3,7 @@ HPP Configuration - Defaults
 """
 
 DEFAULTS = {
-    'ARGS_FORMAT': 'xlsx',
+    'ARGS_FORMAT': 'csv',
     'ARGS_HEADLESS': False,
     'ARGS_INCLUDE_METADATA': False,
 
