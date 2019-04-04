@@ -5,7 +5,6 @@ This abstract class outlines the common behaviors for
 writing the contents of a DataComposer to a file.
 """
 
-import config
 from os import path
 from random import getrandbits
 from datetime import datetime
@@ -15,7 +14,7 @@ class AbstractWriter(object):
 
     output_dir = 'src/web/compositions'
 
-    def __init__(self, composer, include_metadata=config.args.INCLUDE_METADATA):
+    def __init__(self, composer, include_metadata):
         self.composer = composer
         self.include_metadata = include_metadata
 

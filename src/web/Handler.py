@@ -5,6 +5,7 @@ Processes requests for the web server.
 """
 
 from os import path, fstat
+import json
 from pprint import pprint
 from jinja2 import Template
 from urllib.parse import parse_qs
@@ -72,6 +73,8 @@ class Handler(SimpleHTTPRequestHandler):
 
         if 'format' in body and isinstance(body['format'], list):
             body['format'] = body['format'][0]
+
+        body['include_metadata'] = bool('include_metadata' in body)
 
         return body
 

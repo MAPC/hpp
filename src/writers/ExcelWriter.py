@@ -15,7 +15,12 @@ class ExcelWriter(AbstractWriter):
 
     file_ext = 'xlsx'
 
-    deferred_registrations = []
+
+    def __init__(self, *args, **kwargs):
+        self.deferred_registrations = []
+
+        super(ExcelWriter, self).__init__(*args, **kwargs)
+
 
     def write(self):
         self._writer = pd.ExcelWriter('%s.%s' % (self.get_output_path(), self.file_ext), engine='xlsxwriter')
