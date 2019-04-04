@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def demo_projections_pop_by_age_m():
 
@@ -8,11 +7,11 @@ def demo_projections_pop_by_age_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('demo_projections_pop_by_age_m')
-    dataset.table = 'tabular.demo_projections_pop_by_age_m'
+    dataset.table = 'demo_projections_pop_by_age_m'
     dataset.munger = munger
     dataset.layout = layout
 

@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def census2010_p28_hh_by_hhsize_m():
 
@@ -8,11 +7,11 @@ def census2010_p28_hh_by_hhsize_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('census2010_p28_hh_by_hhsize_m')
-    dataset.table = 'tabular.census2010_p28_hh_by_hhsize_m'
+    dataset.table = 'census2010_p28_hh_by_hhsize_m'
     dataset.munger = munger
     dataset.layout = layout
 

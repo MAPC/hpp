@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def rent_acs_m():
 
@@ -8,11 +7,11 @@ def rent_acs_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Gross Rent')
-    dataset.table = 'tabular.b25063_b25064_b25065_rent_acs_m'
+    dataset.table = 'b25063_b25064_b25065_rent_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def hh_with_seniors_acs_m():
 
@@ -8,11 +7,11 @@ def hh_with_seniors_acs_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Households with Seniors')
-    dataset.table = 'tabular.b11007_hh_with_seniors_acs_m'
+    dataset.table = 'b11007_hh_with_seniors_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def hu_units_in_structure_acs_m():
 
@@ -8,11 +7,11 @@ def hu_units_in_structure_acs_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Housing Units in a Structure')
-    dataset.table = 'tabular.b25024_hu_units_in_structure_acs_m'
+    dataset.table = 'b25024_hu_units_in_structure_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

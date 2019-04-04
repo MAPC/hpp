@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def hous_shi_m():
 
@@ -8,11 +7,11 @@ def hous_shi_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Subsidized Housing Inventory')
-    dataset.table = 'tabular.hous_shi_m'
+    dataset.table = 'hous_shi_m'
     dataset.munger = munger
     dataset.layout = layout
 

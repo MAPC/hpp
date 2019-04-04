@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def costburden_acs_m():
 
@@ -8,11 +7,11 @@ def costburden_acs_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('Cost Burdened Households')
-    dataset.table = 'tabular.b25091_b25070_costburden_acs_m'
+    dataset.table = 'b25091_b25070_costburden_acs_m'
     dataset.munger = munger
     dataset.layout = layout
 

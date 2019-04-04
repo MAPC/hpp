@@ -10,7 +10,7 @@
         }
 
         form {
-            width: 740px;
+            width: 750px;
             margin: 0 auto;
 
             text-align: left;
@@ -33,6 +33,10 @@
             display: block;
 
             margin-bottom: .5rem; 
+        }
+
+        label[for="include_metadata"] {
+            margin-top: 2rem;  
         }
 
         button[type="submit"] {
@@ -73,6 +77,8 @@
                     {% endfor %}
                 </select>
 
+                <label for="include_metadata">Include metadata? </label>
+                <input type="checkbox" name="include_metadata" />
             </div>
         </div>
 

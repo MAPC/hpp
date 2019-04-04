@@ -5,7 +5,6 @@ A Dataset describes the way that data should be munged and
 interpreted by the rest of the program.
 """
 
-from pprint import pprint
 import pandas as pd
 from copy import deepcopy
 
@@ -17,6 +16,7 @@ class Dataset(object):
     def __init__(self, title = ''):
         self.title = title
         self.data = pd.DataFrame()
+        self.metadata = {}
         self.munger = None
         self.layout = None
 
@@ -49,8 +49,21 @@ class Dataset(object):
         return self.length
 
 
+    def fetch_metadata(self):
+        try:
+            metadata = prql.request('SELECT alias, name, details FROM metadata.%s' % self.table)
+
+            for row in metadata['rows']:
+                self.metadata[row['name']] = row
+
+        except prql.Error as err:
+            self.errors.append(err.response.text)
+
+        return len(self.metadata.keys())
+
+
     def build_query(self):
-        query_template = "SELECT %s FROM %s"
+        query_template = "SELECT %s FROM tabular.%s"
 
         if len(self.conditions.keys()) > 0:
             condition = ' WHERE '
@@ -97,10 +110,30 @@ class Dataset(object):
             self.conditions = {}
 
 
+    def get_formatted_metadata(self):
+        meta_df = pd.DataFrame(self.metadata.values())
+        meta_df = meta_df[['name', 'alias', 'details']]
+        meta_df.rename(columns={'name': 'Name', 'alias': 'Alias', 'details': 'Details'}, inplace=True)
+
+        return meta_df
+
+
     def render_layout(self, writer):
         if self.layout:
+            if len(self.metadata.keys()) > 0:
+                metadata_cols = {}
+                for name, meta in self.metadata.items():
+                    metadata_cols[name] = meta['alias']
+
+                self.data.rename(columns=metadata_cols, inplace=True)
+
+                if writer.include_metadata:
+                    meta_df = self.get_formatted_metadata()
+                    writer.deferred_register('META %s' % self.title, meta_df)
+
             worksheet = writer.register(self.title, self.data)
             self.layout(worksheet)
+
         else:
             raise Exception('No layout defined for %s' % (self.table))
 

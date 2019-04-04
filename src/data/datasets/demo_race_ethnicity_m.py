@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def demo_race_ethnicity_m():
 
@@ -8,11 +7,11 @@ def demo_race_ethnicity_m():
 
     
     def layout(worksheet):
-        pprint(worksheet)
+        pass
 
 
     dataset = Dataset('demo_race_ethnicity_m')
-    dataset.table = 'tabular.demo_race_ethnicity_m'
+    dataset.table = 'demo_race_ethnicity_m'
     dataset.munger = munger
     dataset.layout = layout
 
