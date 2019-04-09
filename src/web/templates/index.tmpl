@@ -75,7 +75,7 @@
                 {% for group, tables in table_groups.items() %}
                     <div class='select-wrapper'>
                         <input type="checkbox" data-group="{{group}}">{{group}}</input>
-                        <select name="tables[]" multiple data-group="{{group}}">
+                        <select name="tables" multiple data-group="{{group}}">
                             {% for table in tables %}
                                 <option value="{{table}}">{{table}}</option>
                             {% endfor %}
@@ -105,14 +105,18 @@
             const groupSelectors = Array.from(document.querySelectorAll('input[data-group]')) ;
 
             groupSelectors.forEach(function(selector) {
+                const group = document.querySelector('select[data-group="' + selector.dataset.group + '"]');
+
                 selector.addEventListener('change', function() {
-                    const group = document.querySelector('select[data-group="' + selector.dataset.group + '"]');
                     const options = Array.from(group.querySelectorAll('option'));
 
                     options.forEach(function(option) {
                         option.selected = selector.checked;         
                     }); 
-                    group.disabled = selector.checked;
+                });
+
+                group.addEventListener('click', function() {
+                    selector.checked = false;              
                 });
             });
         });

@@ -38,13 +38,17 @@ class Handler(SimpleHTTPRequestHandler):
         template_contents = convert_binary(load_file('templates', 'index.tmpl'))
         template = Template(template_contents)
 
-        table_groups = {}
+        unsorted_groups = {}
         for dataset in self.composer.datasets:
             group = dataset.group.title()
-            if not group in table_groups:
-                table_groups[group] = []
+            if not group in unsorted_groups:
+                unsorted_groups[group] = []
 
-            table_groups[group].append(dataset.title)
+            unsorted_groups[group].append(dataset.title)
+
+        table_groups = {}
+        for group in sorted(unsorted_groups.keys()):
+            table_groups[group] = unsorted_groups[group]
 
         page = template.render(
             munis = self.munis, 
