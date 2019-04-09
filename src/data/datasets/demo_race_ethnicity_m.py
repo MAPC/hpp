@@ -12,6 +12,7 @@ def demo_race_ethnicity_m():
 
     dataset = Dataset('demo_race_ethnicity_m')
     dataset.table = 'demo_race_ethnicity_m'
+    dataset.group = 'demographics'
     dataset.munger = munger
     dataset.layout = layout
 

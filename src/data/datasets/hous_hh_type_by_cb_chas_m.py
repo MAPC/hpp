@@ -12,6 +12,7 @@ def hous_hh_type_by_cb_chas_m():
 
     dataset = Dataset('Household Type by Cost Burden Status')
     dataset.table = 'hous_hh_type_by_cb_chas_m'
+    dataset.group = 'affordability'
     dataset.munger = munger
     dataset.layout = layout
 

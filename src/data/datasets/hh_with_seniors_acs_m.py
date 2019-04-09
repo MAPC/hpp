@@ -12,6 +12,7 @@ def hh_with_seniors_acs_m():
 
     dataset = Dataset('Households with Seniors')
     dataset.table = 'b11007_hh_with_seniors_acs_m'
+    dataset.group = 'housing'
     dataset.munger = munger
     dataset.layout = layout
 

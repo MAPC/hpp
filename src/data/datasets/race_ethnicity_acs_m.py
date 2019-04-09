@@ -12,6 +12,7 @@ def race_ethnicity_acs_m():
 
     dataset = Dataset('Race and Ethnicity Estimates')
     dataset.table = 'b03002_race_ethnicity_acs_m'
+    dataset.group = 'demographics'
     dataset.munger = munger
     dataset.layout = layout
 

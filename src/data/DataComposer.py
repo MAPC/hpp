@@ -71,3 +71,21 @@ class DataComposer(object):
         for dataset in self.datasets:
             if dataset.accept_propogations:
                 dataset.add_condition(column, value)
+
+
+    def get_datasets_by_group(self):
+        unsorted_groups = {}
+        for dataset in self.datasets:
+            group = dataset.group.title()
+            if not group in unsorted_groups:
+                unsorted_groups[group] = []
+
+            unsorted_groups[group].append(dataset.title)
+
+        table_groups = {}
+        for group in sorted(unsorted_groups.keys()):
+            table_groups[group] = unsorted_groups[group]
+
+        return table_groups
+
+
