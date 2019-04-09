@@ -36,10 +36,6 @@ args = Munch({
     'TABLES': strip_list(get_value('ARGS_TABLES')),
 })
 
-excel = Munch({
-    'MAX_COL_WIDTH': int(get_value('EXCEL_MAX_COL_WIDTH')),
-})
-
 prql = Munch({
     'HOST': get_value('PRQL_HOST'),
     'TOKEN': get_value('PRQL_TOKEN'),
@@ -47,4 +43,9 @@ prql = Munch({
 
 web = Munch({
     'PORT': int(get_value('WEB_PORT')),
+})
+
+writer = Munch({
+    'MAX_COL_WIDTH': int(get_value('WRITER_MAX_COL_WIDTH')),
+    'MAX_COMPOSITIONS': int(get_value('WRITER_MAX_COMPOSITIONS'))
 })

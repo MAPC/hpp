@@ -54,7 +54,7 @@ def expand_columns(sheet, df):
         series = df[col]
         max_len = max([ max([len(x) for x in list(series.astype(str))]), len(col)]) + 1
 
-        if max_len > config.excel.MAX_COL_WIDTH:
-            max_len = config.excel.MAX_COL_WIDTH
+        if max_len > config.writer.MAX_COL_WIDTH:
+            max_len = config.writer.MAX_COL_WIDTH
 
         res = sheet.set_column(i, i, max_len)
