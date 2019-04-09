@@ -12,6 +12,7 @@ def educ_enrollment_by_year_districts():
 
     dataset = Dataset('Enrollment by School Year')
     dataset.table = 'educ_enrollment_by_year_districts'
+    dataset.group = 'demographics'
     dataset.munger = munger
     dataset.layout = layout
     dataset.accept_propogations = False

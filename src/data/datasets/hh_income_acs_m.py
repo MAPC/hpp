@@ -12,6 +12,7 @@ def hh_income_acs_m():
 
     dataset = Dataset('Household Income')
     dataset.table = 'b19001_hh_income_acs_m'
+    dataset.group = 'affordability'
     dataset.munger = munger
     dataset.layout = layout
 
