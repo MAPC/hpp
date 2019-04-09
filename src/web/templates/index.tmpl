@@ -10,7 +10,7 @@
         }
 
         form {
-            width: 750px;
+            width: 850px;
             margin: 0 auto;
 
             text-align: left;
@@ -25,8 +25,17 @@
             margin: 0 .5%;
         }
 
+        .select-wrapper + .select-wrapper {
+            margin-top: 1rem;
+        }
+
+        .select-wrapper input[data-group] {
+            margin-bottom: .5rem; 
+        }
+
         select[multiple] {
             min-height: 10rem; 
+            overflow-y: auto;
         }
 
         label {
@@ -42,7 +51,7 @@
         button[type="submit"] {
             float: right;
 
-            margin-top: 1rem; 
+            margin-top: 4rem; 
         }
     </style>
 </head>
@@ -62,11 +71,17 @@
 
             <div class="form-field">
                 <label for="tables">Tables</label>
-                <select name="tables" multiple>
-                    {% for table in tables %}
-                        <option value="{{table}}">{{table}}</option>
-                    {% endfor %}
-                </select>
+
+                {% for group, tables in table_groups.items() %}
+                    <div class='select-wrapper'>
+                        <input type="checkbox" data-group="{{group}}">{{group}}</input>
+                        <select name="tables[]" multiple data-group="{{group}}">
+                            {% for table in tables %}
+                                <option value="{{table}}">{{table}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endfor %}
             </div>
 
             <div class='form-field'>
@@ -79,10 +94,28 @@
 
                 <label for="include_metadata">Include metadata? </label>
                 <input type="checkbox" name="include_metadata" />
+
+                <button type="submit">Download Data</button>
             </div>
         </div>
-
-        <button type="submit">Download Data</button>
     </form>
+
+    <script>
+        window.addEventListener('load', function() {
+            const groupSelectors = Array.from(document.querySelectorAll('input[data-group]')) ;
+
+            groupSelectors.forEach(function(selector) {
+                selector.addEventListener('change', function() {
+                    const group = document.querySelector('select[data-group="' + selector.dataset.group + '"]');
+                    const options = Array.from(group.querySelectorAll('option'));
+
+                    options.forEach(function(option) {
+                        option.selected = selector.checked;         
+                    }); 
+                    group.disabled = selector.checked;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
