@@ -47,5 +47,5 @@ web = Munch({
 
 writer = Munch({
     'MAX_COL_WIDTH': int(get_value('WRITER_MAX_COL_WIDTH')),
-    'MAX_COMPOSITIONS': int(get_values('WRITER_MAX_COMPOSITIONS'))
+    'MAX_COMPOSITIONS': int(get_value('WRITER_MAX_COMPOSITIONS'))
 })
