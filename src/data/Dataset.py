@@ -6,7 +6,6 @@ interpreted by the rest of the program.
 """
 
 import pandas as pd
-from copy import deepcopy
 
 from ..services import prql
 
