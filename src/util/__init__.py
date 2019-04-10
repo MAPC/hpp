@@ -34,6 +34,9 @@ def parse_bool(val):
 
 
 def strip_list(val):
+    if isinstance(val, list) and len(val) > 0:
+        val = val[0]
+
     if val:
         return [x.strip() for x in str(val).split(',')]
     else:

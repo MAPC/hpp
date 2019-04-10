@@ -13,11 +13,10 @@ from os import listdir, path, unlink
 
 class AbstractWriter(object):
 
-    output_dir = 'src/web/compositions'
-
-    def __init__(self, composer, include_metadata):
+    def __init__(self, composer, include_metadata, outpath = None):
         self.composer = composer
         self.include_metadata = include_metadata
+        self.output_dir = outpath if outpath else config.args.OUTPATH
 
         hash_len = 10
         random_hash = "%0x" % getrandbits(hash_len * 4)

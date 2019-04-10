@@ -26,6 +26,7 @@ args = Munch({
     'HEADLESS': parse_bool(get_value('ARGS_HEADLESS')),
     'INCLUDE_METADATA': parse_bool(get_value('ARGS_INCLUDE_METADATA')),
     'MUNIS': strip_list(get_value('ARGS_MUNIS')),
+    'OUTPATH': get_value('ARGS_OUTPATH'),
     'TABLES': strip_list(get_value('ARGS_TABLES')),
 })
 

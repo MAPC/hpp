@@ -18,9 +18,9 @@ def main():
         composer.compose(args['munis'], args['tables'])
         
         if args['format'] == 'csv':
-            writer = CSVWriter(composer, args['include_metadata'])
+            writer = CSVWriter(composer, args['include_metadata'], args['outpath'])
         else:
-            writer = ExcelWriter(composer, args['include_metadata'])
+            writer = ExcelWriter(composer, args['include_metadata'], args['outpath'])
 
         return writer.write()
 
