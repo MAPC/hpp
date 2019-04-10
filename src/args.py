@@ -2,8 +2,10 @@
 HPP - Launch arguments
 """
 
-import config
 from getopt import getopt
+
+import config
+from .util import strip_list
 
 
 short_args = 'f:hm'
@@ -16,7 +18,7 @@ def parse_args(args):
         'format': config.args.FORMAT,
         'headless': config.args.HEADLESS,
         'tables': config.args.TABLES,
-        'munis': config.args.MUNIS if config.args.MUNIS else options[1],
+        'munis': config.args.MUNIS if config.args.MUNIS else strip_list(options[1][0]),
         'include_metadata': config.args.INCLUDE_METADATA,
     }
 
