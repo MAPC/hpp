@@ -23,7 +23,6 @@ class Handler(SimpleHTTPRequestHandler):
 
     def __init__(self, *args, **kwargs):
         self.composer = DataComposer()
-        self.tables = [dataset.title for dataset in self.composer.datasets]
 
         muni_response = prql.request('SELECT DISTINCT municipal FROM tabular.b25010_avg_hhsize_by_tenure_acs_m')
         munis = [row['municipal'] for row in muni_response['rows']]
@@ -39,7 +38,7 @@ class Handler(SimpleHTTPRequestHandler):
 
         page = template.render(
             munis = self.munis, 
-            tables = self.tables, 
+            table_groups = self.composer.get_datasets_by_group(),
             formats = list(self.formatWriters.keys())
         )
 

@@ -20,6 +20,7 @@ class Dataset(object):
         self.layout = None
 
         self.table = ''
+        self.group = ''
         self.columns = ['*']
         self.length = -1
         self.conditions = {}
