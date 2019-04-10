@@ -4,15 +4,13 @@ HPP Web - Handler
 Processes requests for the web server.
 """
 
-from os import path, fstat
-import json
-from pprint import pprint
 from jinja2 import Template
 from urllib.parse import parse_qs
 from http.server import SimpleHTTPRequestHandler
 
 from ..services import prql
 from ..data import DataComposer
+from ..util import convert_binary, load_file
 from ..writers import ExcelWriter, CSVWriter
 
 
@@ -97,31 +95,3 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_response(301)
         self.send_header('Location', '/')
         self.end_headers()
-
-
-
-def convert_binary(data):
-    if isinstance(data, dict):
-        items = list(data.items())
-
-        for key, value in items:
-            data[key.decode()] = convert_binary(value)
-            del data[key]
-
-        return data
-
-    elif isinstance(data, list):
-        return list(map(convert_binary, data))
-
-    else:
-        return data.decode()
-
-
-def load_file(directory, file_name):
-    cwd = path.dirname(path.realpath(__file__))
-    file_path = path.join(cwd, directory, file_name)
-
-    with open(file_path, 'rb') as fp:
-        file_contents = fp.read()
-
-    return file_contents

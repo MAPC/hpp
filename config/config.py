@@ -8,22 +8,15 @@ declaration by appending it to the import list at the config package root.
 from os import environ
 from munch import Munch
 from dotenv import find_dotenv, load_dotenv
+
 from .defaults import DEFAULTS
+from src.util import parse_bool, strip_list
+
 
 load_dotenv(find_dotenv())
 
-
 def get_value(key):
     return environ.get(key, DEFAULTS.get(key))
-
-def parse_bool(val):
-    return bool(str(val).lower() in ('true', 'yes', 't', '1'))
-
-def strip_list(val):
-    if val:
-        return [x.strip() for x in str(val).split(',')]
-    else:
-        return val
 
 
 # Config declarations

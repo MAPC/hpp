@@ -7,7 +7,7 @@ to a .xlsx file.
 
 import config
 import pandas as pd
-from .abbreviate import abbreviate
+from ..util import abbreviate
 from .AbstractWriter import AbstractWriter
 
 
