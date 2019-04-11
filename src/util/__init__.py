@@ -6,8 +6,6 @@ anywhere logically, even if only used in one spot of the
 whole program.
 """
 
-from os import path
-
 
 abbreviations = {
     'average': 'avg',
@@ -58,13 +56,3 @@ def convert_binary(data):
 
     else:
         return data.decode()
-
-
-def load_file(directory, file_name):
-    cwd = path.dirname(path.realpath(__file__))
-    file_path = path.join(cwd, directory, file_name)
-
-    with open(file_path, 'rb') as fp:
-        file_contents = fp.read()
-
-    return file_contents

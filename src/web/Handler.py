@@ -4,13 +4,14 @@ HPP Web - Handler
 Processes requests for the web server.
 """
 
+from os import path
 from jinja2 import Template
 from urllib.parse import parse_qs
 from http.server import SimpleHTTPRequestHandler
 
 from ..services import prql
 from ..data import DataComposer
-from ..util import convert_binary, load_file
+from ..util import convert_binary
 from ..writers import ExcelWriter, CSVWriter
 
 
@@ -94,3 +95,13 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_response(301)
         self.send_header('Location', '/')
         self.end_headers()
+
+
+def load_file(directory, file_name):
+    cwd = path.dirname(path.realpath(__file__))
+    file_path = path.join(cwd, directory, file_name)
+
+    with open(file_path, 'rb') as fp:
+        file_contents = fp.read()
+
+    return file_contents
