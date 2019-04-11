@@ -6,7 +6,7 @@ DEFAULTS = {
     'ARGS_FORMAT': 'csv',
     'ARGS_HEADLESS': False,
     'ARGS_INCLUDE_METADATA': False,
-    'ARGS_OUTPATH': 'src/web/components',
+    'ARGS_OUTPATH': 'src/web/compositions',
 
     'PRQL_HOST': 'https://prql.mapc.org',
 
