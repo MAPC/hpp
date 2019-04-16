@@ -5,10 +5,16 @@ The class that manages the server lifecycle.
 """
 
 import config
-from socketserver import TCPServer
+from http.server import HTTPServer
 
 from .Handler import Handler
 
+
+class LongHTTPServer(HTTPServer):
+    def __init__(self, *args, **kwargs):
+        self.timeout = 60
+        super(LongHTTPServer, self).__init__(*args, **kwargs)
+         
 
 class Server(object):
 
@@ -16,5 +22,5 @@ class Server(object):
         self.handler = Handler
 
     def serve(self):
-        with TCPServer(("", config.web.PORT), self.handler) as httpd:
+        with LongHTTPServer(("", config.web.PORT), self.handler) as httpd:
             return httpd.serve_forever()

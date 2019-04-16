@@ -4,8 +4,8 @@ HPP Web - Handler
 Processes requests for the web server.
 """
 
-from os import path, fstat
 import json
+from os import path, fstat
 from pprint import pprint
 from jinja2 import Template
 from urllib.parse import parse_qs
