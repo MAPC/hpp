@@ -9,7 +9,7 @@ COPY ./ .
 RUN set -ex; \
     \
     pip3 install -e . \
-    && echo "#!/bin/bash \n pip3 install -e . && hpp" > /usr/local/bin/exec-hpp \
+    && echo "#!/bin/bash \n pip3 install -e . && hpp"> /usr/local/bin/exec-hpp \
     && chmod +x /usr/local/bin/exec-hpp
 
 CMD ["exec-hpp"]

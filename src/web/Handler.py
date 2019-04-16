@@ -13,6 +13,7 @@ from http.server import SimpleHTTPRequestHandler
 
 from ..services import prql
 from ..data import DataComposer
+from ..util import convert_binary
 from ..writers import ExcelWriter, CSVWriter
 
 
@@ -96,24 +97,6 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_response(301)
         self.send_header('Location', '/')
         self.end_headers()
-
-
-
-def convert_binary(data):
-    if isinstance(data, dict):
-        items = list(data.items())
-
-        for key, value in items:
-            data[key.decode()] = convert_binary(value)
-            del data[key]
-
-        return data
-
-    elif isinstance(data, list):
-        return list(map(convert_binary, data))
-
-    else:
-        return data.decode()
 
 
 def load_file(directory, file_name):

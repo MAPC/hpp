@@ -9,7 +9,7 @@ import random
 import pandas as pd
 
 import config
-from .abbreviate import abbreviate
+from ..util import abbreviate
 from .AbstractWriter import AbstractWriter
 
 
