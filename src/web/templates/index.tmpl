@@ -112,6 +112,7 @@
 
             groupSelectors.forEach(function(selector) {
                 const group = document.querySelector('select[data-group="' + selector.dataset.group + '"]');
+                const tables = Array.from(group.querySelectorAll('option'));
 
                 selector.addEventListener('change', function() {
                     const options = Array.from(group.querySelectorAll('option'));
@@ -123,6 +124,17 @@
 
                 group.addEventListener('click', function() {
                     selector.checked = false;              
+                });
+
+                tables.forEach(function(table) {
+                    table.addEventListener('mousedown', function() {
+                        table.dataset.isSelected = table.selected;//table.selected === 'true';
+                    });
+                    table.addEventListener('click', function() {
+                        if (table.dataset.isSelected === 'true') {
+                            table.selected = false;
+                        }
+                    });
                 });
             });
         });
