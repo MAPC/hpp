@@ -46,7 +46,7 @@ class ExcelWriter(AbstractWriter):
             for table in tables:
                 tables_sorted_by_group[table] = group
 
-            colors_by_group[group] = self.colors.pop(random.randint(0, len(self.colors)))
+            colors_by_group[group] = self.colors.pop(random.randint(0, len(self.colors) - 1))
 
         for table, group in tables_sorted_by_group.items():
             if table in self.registrations:
