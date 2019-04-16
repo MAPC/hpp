@@ -27,7 +27,8 @@ class DataComposer(object):
         fetch_errors = []
         if tables != None:
             for table in tables: 
-                dataset = [dataset for dataset in self.datasets if dataset.title == table]
+                table_in_lowercase = table.lower()
+                dataset = [dataset for dataset in self.datasets if dataset.title.lower() == table_in_lowercase]
 
                 if len(dataset) > 0:
                     dataset = dataset[0]

@@ -51,7 +51,7 @@ class Handler(SimpleHTTPRequestHandler):
     def do_POST(self):
         body = self.parse_body()
 
-        if not 'munis' in body or not 'tables' in body:
+        if not 'tables' in body:
             self.reload()
             return
 
@@ -74,7 +74,11 @@ class Handler(SimpleHTTPRequestHandler):
         if 'format' in body and isinstance(body['format'], list):
             body['format'] = body['format'][0]
 
+        if not 'munis' in body:
+            body['munis'] = []
+
         body['include_metadata'] = bool('include_metadata' in body)
+
 
         return body
 
