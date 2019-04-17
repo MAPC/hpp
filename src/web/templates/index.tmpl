@@ -41,6 +41,10 @@
             margin-bottom: .5rem; 
         }
 
+        .mod-wrapper + .mod-wrapper {
+            margin-top: 1rem;
+        }
+
         select[multiple] {
             min-height: 10rem; 
             overflow: auto;
@@ -112,8 +116,15 @@
                     {% endfor %}
                 </select>
 
-                <label for="include_metadata">Include metadata? </label>
-                <input type="checkbox" name="include_metadata" />
+                <div class="mod-wrapper">
+                    <label for="include_metadata">Include metadata? </label>
+                    <input type="checkbox" name="include_metadata" />
+                </div>
+
+                <div class="mod-wrapper">
+                    <label for="latest_year">Only latest year? </label>
+                    <input type="checkbox" name="latest_year" />
+                </div>
 
                 <button type="submit">Download Data</button>
             </div>
