@@ -78,7 +78,7 @@
                 <label for="munis">Municipalities</label>
                 <select name="munis" multiple>
                     {% for muni in munis %}
-                        <option value="{{muni}}">{{muni}}</option>
+                        <option value="{{muni}}" data-deselectable>{{muni}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -91,7 +91,7 @@
                         <input type="checkbox" data-group="{{group}}">{{group}}</input>
                         <select name="tables" multiple data-group="{{group}}">
                             {% for table in tables %}
-                                <option value="{{table.title}}">
+                                <option value="{{table.title}}" data-deselectable>
                                     {{table.title}} 
 
                                     {% if table.source != None %}
@@ -123,7 +123,6 @@
     <script>
         window.addEventListener('load', function() {
             const groupSelectors = Array.from(document.querySelectorAll('input[data-group]')) ;
-
             groupSelectors.forEach(function(selector) {
                 const group = document.querySelector('select[data-group="' + selector.dataset.group + '"]');
                 const tables = Array.from(group.querySelectorAll('option'));
@@ -141,14 +140,18 @@
                 });
 
                 tables.forEach(function(table) {
-                    table.addEventListener('mousedown', function() {
-                        table.dataset.isSelected = table.selected;//table.selected === 'true';
-                    });
-                    table.addEventListener('click', function() {
-                        if (table.dataset.isSelected === 'true') {
-                            table.selected = false;
-                        }
-                    });
+                });
+            });
+
+            const options = Array.from(document.querySelectorAll('option[data-deselectable]'));
+            options.forEach(function(option) {
+                 option.addEventListener('mousedown', function() {
+                    option.dataset.isSelected = option.selected;//table.selected === 'true';
+                });
+                option.addEventListener('click', function() {
+                    if (option.dataset.isSelected === 'true') {
+                        option.selected = false;
+                    }
                 });
             });
         });
