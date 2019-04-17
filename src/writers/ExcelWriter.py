@@ -44,7 +44,7 @@ class ExcelWriter(AbstractWriter):
         tables_sorted_by_group = {}
         for group, tables in self.composer.get_datasets_by_group().items():
             for table in tables:
-                tables_sorted_by_group[table] = group
+                tables_sorted_by_group[table['title']] = group
 
             colors_by_group[group] = self.colors.pop(random.randint(0, len(self.colors) - 1))
 

@@ -19,6 +19,8 @@ class DataComposer(object):
         for constructor in data_constructors:
             self.datasets.append(constructor())    
 
+        self.fetch_all_metadata()
+
 
     def compose(self, munis, tables = None):
         for muni in munis:
@@ -46,7 +48,6 @@ class DataComposer(object):
 
     def fetch(self, dataset):
         dataset.fetch()
-        dataset.fetch_metadata()
         self.composed_datasets.append(dataset)
 
         return dataset.is_ready_for_use()
@@ -61,6 +62,11 @@ class DataComposer(object):
                 errors.append(err)
 
         return errors
+
+
+    def fetch_all_metadata(self):
+        for dataset in self.datasets:
+            dataset.fetch_metadata()
 
 
     def munge_all(self):
@@ -81,12 +87,17 @@ class DataComposer(object):
             if not group in unsorted_groups:
                 unsorted_groups[group] = []
 
-            unsorted_groups[group].append(dataset.title)
+            source = None
+            if 'creator' in dataset.metadata:
+                source = dataset.metadata['creator']['details']
+
+            unsorted_groups[group].append({ 
+                'title': dataset.title, 
+                'source': source
+            })
 
         table_groups = {}
         for group in sorted(unsorted_groups.keys()):
             table_groups[group] = unsorted_groups[group]
 
         return table_groups
-
-

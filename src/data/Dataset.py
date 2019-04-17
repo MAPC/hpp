@@ -50,14 +50,15 @@ class Dataset(object):
 
 
     def fetch_metadata(self):
-        try:
-            metadata = prql.request('SELECT alias, name, details FROM metadata.%s' % self.table)
+        if not len(self.metadata.keys()) > 0:
+            try:
+                metadata = prql.request('SELECT alias, name, details FROM metadata.%s' % self.table)
 
-            for row in metadata['rows']:
-                self.metadata[row['name']] = row
+                for row in metadata['rows']:
+                    self.metadata[row['name']] = row
 
-        except prql.Error as err:
-            self.errors.append(err.response.text)
+            except prql.Error as err:
+                self.errors.append(err.response.text)
 
         return len(self.metadata.keys())
 

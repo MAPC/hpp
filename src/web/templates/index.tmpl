@@ -21,8 +21,16 @@
         }
 
         .form-field {
-            flex: 1 0 31.33%;        
+            flex: 1 0 27%;        
             margin: 0 .66%;
+        }
+
+        .form-field:nth-of-type(2) {
+            flex: 1 0 40%; 
+        }
+
+        select[data-group] {
+            width: 100%;
         }
 
         .select-wrapper + .select-wrapper {
@@ -35,7 +43,7 @@
 
         select[multiple] {
             min-height: 10rem; 
-            overflow-y: auto;
+            overflow: auto;
         }
 
         select[name="munis"] {
@@ -83,7 +91,13 @@
                         <input type="checkbox" data-group="{{group}}">{{group}}</input>
                         <select name="tables" multiple data-group="{{group}}">
                             {% for table in tables %}
-                                <option value="{{table}}">{{table}}</option>
+                                <option value="{{table.title}}">
+                                    {{table.title}} 
+
+                                    {% if table.source != None %}
+                                        ({{table.source}})
+                                    {% endif %}
+                                </option>
                             {% endfor %}
                         </select>
                     </div>
