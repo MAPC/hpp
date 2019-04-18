@@ -25,6 +25,8 @@ class Dataset(object):
         self.length = -1
         self.conditions = {}
         self.sort_by = []
+        self.source = ''
+        self.year_column = ''
         self.default_condition = 'municipal'
         self.accept_propogations = True
 

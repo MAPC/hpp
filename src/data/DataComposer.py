@@ -5,9 +5,11 @@ Composes Datasets together by running their mungers and
 preparing them to be written to files.
 """
 
+from pprint import pprint
+
 from .Dataset import Dataset
 from .datasets import data_constructors
-from pprint import pprint
+from ..services import prql
 
 
 class DataComposer(object):
@@ -16,8 +18,18 @@ class DataComposer(object):
         self.datasets = []
         self.composed_datasets = []
 
+        table_meta = {}
+        browser_tables = prql.request('SELECT table_name, source, yearcolumn FROM tabular._data_browser')
+        for row in browser_tables['rows']:
+            table_meta[row['table_name']] = row
+
         for constructor in data_constructors:
             self.datasets.append(constructor())    
+
+        for dataset in self.datasets:
+            if dataset.table in table_meta:
+                dataset.source = table_meta[dataset.table]['source']
+                dataset.year_column = table_meta[dataset.table]['yearcolumn']
 
         self.fetch_all_metadata()
 
@@ -87,13 +99,9 @@ class DataComposer(object):
             if not group in unsorted_groups:
                 unsorted_groups[group] = []
 
-            source = None
-            if 'creator' in dataset.metadata:
-                source = dataset.metadata['creator']['details']
-
             unsorted_groups[group].append({ 
                 'title': dataset.title, 
-                'source': source
+                'source': dataset.source
             })
 
         table_groups = {}
