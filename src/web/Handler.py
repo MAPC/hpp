@@ -78,7 +78,7 @@ class Handler(SimpleHTTPRequestHandler):
             body['munis'] = []
 
         body['include_metadata'] = bool('include_metadata' in body)
-
+        body['latest_year'] = bool('latest_year' in body)
 
         return body
 

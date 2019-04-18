@@ -9,7 +9,7 @@ from .util import strip_list
 
 
 short_args = 'f:t:o:hm'
-long_args = ['format=', 'tables=', 'outpath=', 'headless', 'include-metadata']
+long_args = ['format=', 'tables=', 'outpath=', 'headless', 'include-metadata', 'latest-year']
 
 def parse_args(args):
     options = getopt(args, short_args, long_args)
@@ -18,6 +18,7 @@ def parse_args(args):
         'format': config.args.FORMAT,
         'headless': config.args.HEADLESS,
         'include_metadata': config.args.INCLUDE_METADATA,
+        'latest_year': config.args.LATEST_YEAR,
         'munis': config.args.MUNIS if config.args.MUNIS else strip_list(options[1]),
         'outpath': '.',
         'tables': config.args.TABLES,
@@ -35,6 +36,9 @@ def parse_args(args):
 
         if opt in ['-o', '--outpath']:
             values['outpath'] = str(arg).strip()
+
+        if opt in ['--latest-year']:
+            values['latest_year'] = True
 
         if opt in ['-f', '--format']:
             formats = {

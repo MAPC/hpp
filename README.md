@@ -31,6 +31,8 @@ _-\-tables, -t_ : A comma-separated string argument containing the titles of the
 
 _-\-outpath, -o_ : An absolute path for where the output of the program should be written. The default path for headless mode is the current directory that the user is executing the command from. 
 
+_-\-latest_year_ : Will only grab data for the most recent year listed in each dataset.
+
 > __Note:__ Any of these arguments can be passed to the `hpp` command via environment variables prefixed with `ARGS_` (e.g. `ARGS_HEADLESS=true`). This is vitally important if you choose to use Docker as your development environment.
 
 ### Configuration and Environment
