@@ -7,6 +7,7 @@ to a .xlsx file.
 
 import random
 import pandas as pd
+from pprint import pprint
 
 import config
 from ..util import abbreviate
@@ -18,10 +19,11 @@ class ExcelWriter(AbstractWriter):
     file_ext = 'xlsx'
 
     def __init__(self, *args, **kwargs):
-        self.registrations = {}
         self.deferred_registrations = []
 
-        self.colors = [
+        super(ExcelWriter, self).__init__(*args, **kwargs)
+
+        color_pool = [
             '#E53935', # red
             '#AB47BC', # purple
             '#64B5F6', # blue
@@ -31,45 +33,31 @@ class ExcelWriter(AbstractWriter):
             '#FF9800', # orange
         ]
 
-        super(ExcelWriter, self).__init__(*args, **kwargs)
+        self.colors = {}
+        for group, tables in self.composer.get_datasets_by_group().items():
+            self.colors[group.lower()] = color_pool.pop(random.randint(0, len(color_pool) - 1))
 
 
     def write(self):
         self._writer = pd.ExcelWriter('%s.%s' % (self.get_output_path(), self.file_ext), engine='xlsxwriter')
 
-        for dataset in self.composer.composed_datasets:
-            dataset.render_layout(self)
-
-        colors_by_group = {}
         tables_sorted_by_group = {}
         for group, tables in self.composer.get_datasets_by_group().items():
             for table in tables:
                 tables_sorted_by_group[table['title']] = group
 
-            colors_by_group[group] = self.colors.pop(random.randint(0, len(self.colors) - 1))
-
-        for table, group in tables_sorted_by_group.items():
-            if table in self.registrations:
-                self.process_registration(table, self.registrations[table], colors_by_group[group])
+        for dataset in self.composer.composed_datasets:
+            dataset.render_layout(self)
 
         if len(self.deferred_registrations) > 0:
             for deferred in self.deferred_registrations:
-                self.process_registration(deferred['name'], deferred['df'])
+                self.register(deferred['name'], deferred['df'])
 
         self._writer.save()
         self._writer.close()
 
 
-    def register(self, name, df):
-        if not name in self.registrations:
-            self.registrations[name] = df
-
-
-    def deferred_register(self, name, df):
-        self.deferred_registrations.append({ 'name': name, 'df': df })
-
-
-    def process_registration(self, name, df, color = None):
+    def register(self, name, df, color = None):
         if len(name) > 31:
             name = abbreviate(name, 31).title()
 
@@ -82,6 +70,10 @@ class ExcelWriter(AbstractWriter):
         return expand_columns(sheet, df)
 
 
+    def deferred_register(self, name, df):
+        self.deferred_registrations.append({ 'name': name, 'df': df })
+
+
 
 def expand_columns(sheet, df):
     for i, col in enumerate(df):
@@ -92,3 +84,5 @@ def expand_columns(sheet, df):
             max_len = config.writer.MAX_COL_WIDTH
 
         res = sheet.set_column(i, i, max_len)
+
+    return sheet

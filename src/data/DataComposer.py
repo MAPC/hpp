@@ -31,8 +31,6 @@ class DataComposer(object):
                 dataset.source = table_meta[dataset.table]['source']
                 dataset.year_column = table_meta[dataset.table]['yearcolumn']
 
-        self.fetch_all_metadata()
-
 
     def compose(self, munis, tables = None, latest_year = False):
         for muni in munis:
@@ -64,6 +62,7 @@ class DataComposer(object):
         else:
             dataset.fetch()
 
+        dataset.fetch_metadata() 
         self.composed_datasets.append(dataset)
 
         return dataset.is_ready_for_use()
@@ -78,11 +77,6 @@ class DataComposer(object):
                 errors.append(err)
 
         return errors
-
-
-    def fetch_all_metadata(self):
-        for dataset in self.datasets:
-            dataset.fetch_metadata()
 
 
     def munge_all(self):

@@ -150,7 +150,7 @@ class Dataset(object):
                     meta_df = self.get_formatted_metadata()
                     writer.deferred_register('META %s' % self.title, meta_df)
 
-            worksheet = writer.register(self.title, self.data)
+            worksheet = writer.register(self.title, self.data, writer.colors[self.group])
             self.layout(worksheet)
 
         else:
