@@ -13,6 +13,7 @@ from .demo_projections_pop_m import demo_projections_pop_m
 from .demo_projections_pop_by_age_m import demo_projections_pop_by_age_m
 from .demo_race_ethnicity_m import demo_race_ethnicity_m
 from .educ_enrollment_by_year_districts import educ_enrollment_by_year_districts
+from .educ_post_grad_plans_by_year_districts import educ_post_grad_plans_by_year_districts
 from .hh_income_acs_m import hh_income_acs_m
 from .hh_tenure_by_age_acs_m import hh_tenure_by_age_acs_m
 from .hh_with_seniors_acs_m import hh_with_seniors_acs_m
@@ -40,6 +41,7 @@ data_constructors = [
     demo_projections_pop_by_age_m,
     demo_race_ethnicity_m,
     educ_enrollment_by_year_districts,
+    educ_post_grad_plans_by_year_districts,
     hh_income_acs_m,
     hh_tenure_by_age_acs_m,
     hh_with_seniors_acs_m,

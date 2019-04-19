@@ -29,10 +29,6 @@
             flex: 1 0 40%; 
         }
 
-        select[data-group] {
-            width: 100%;
-        }
-
         .select-wrapper + .select-wrapper {
             margin-top: 1rem;
         }
@@ -45,7 +41,13 @@
             margin-top: 1rem;
         }
 
+        small {
+            display: block;
+            margin-bottom: 10px;
+        }
+
         select[multiple] {
+            width: 100%;
             min-height: 10rem; 
             overflow: auto;
         }
@@ -80,6 +82,7 @@
         <div class="form-fields">
             <div class="form-field">
                 <label for="munis">Municipalities</label>
+                <small><b>Note:</b> Not all geographies have data in each dataset.</small>
                 <select name="munis" multiple>
                     {% for muni in munis %}
                         <option value="{{muni}}" data-deselectable>{{muni}}</option>

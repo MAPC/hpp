@@ -1,5 +1,4 @@
 from ..Dataset import Dataset
-from pprint import pprint
 
 def avg_hhsize_by_tenure_acs_m():
 
@@ -14,7 +13,5 @@ def avg_hhsize_by_tenure_acs_m():
     dataset.group = 'housing'
     dataset.munger = munger
     dataset.layout = layout
-
-    dataset.sort_by = ['municipal']
 
     return dataset

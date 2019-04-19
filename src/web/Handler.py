@@ -27,7 +27,7 @@ class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         self.composer = DataComposer()
 
-        muni_response = prql.request('SELECT DISTINCT municipal FROM tabular.b25010_avg_hhsize_by_tenure_acs_m')
+        muni_response = prql.request('SELECT DISTINCT municipal FROM tabular.b25127_hu_tenure_year_built_units_acs_m')
         munis = [row['municipal'] for row in muni_response['rows']]
         munis.sort()
         self.munis = munis
