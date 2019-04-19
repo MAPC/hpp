@@ -42,9 +42,19 @@ class Dataset(object):
             self.data = pd.DataFrame(data['rows'])
             self.length = len(self.data.index)
 
-            sort_by = self.sort_by if len(self.sort_by) > 0 else list(self.conditions.keys())
-            if len(sort_by) > 0 and set(sort_by).issubset(self.data.columns):
-                self.data.sort_values(by=sort_by, inplace=True)
+            sort_by_list = self.sort_by if len(self.sort_by) > 0 else [x for x in [self.default_condition, self.year_column] if x != '']
+
+            if 'muni_id' in self.data.columns:
+                sort_by_list.insert(0, 'muni_id')
+                self.data['muni_id'] = self.data['muni_id'].astype(int)
+
+            sort_by = set(sort_by_list)
+            columns = set(self.data.columns)
+
+            if len(sort_by_list) > 0 and sort_by.issubset(columns):
+                self.data.sort_values(by=sort_by_list, inplace=True)
+        
+            self.data = self.data[sort_by_list + list(columns.difference(sort_by))]
 
         except prql.Error as err:
             self.errors.append(err.response.text)
