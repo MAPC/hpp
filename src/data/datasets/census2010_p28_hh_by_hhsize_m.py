@@ -16,6 +16,4 @@ def census2010_p28_hh_by_hhsize_m():
     dataset.munger = munger
     dataset.layout = layout
 
-    dataset.add_condition('years', '2010')
-
     return dataset

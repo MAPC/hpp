@@ -34,7 +34,7 @@ class DataComposer(object):
         self.fetch_all_metadata()
 
 
-    def compose(self, munis, tables = None):
+    def compose(self, munis, tables = None, latest_year = False):
         for muni in munis:
             self.propogate_condition(None, muni)
 
@@ -46,30 +46,34 @@ class DataComposer(object):
 
                 if len(dataset) > 0:
                     dataset = dataset[0]
-                    self.fetch(dataset)
+                    self.fetch(dataset, latest_year)
                     dataset.munge()
                 else:
                     fetch_errors.append("Couldn't find table %s" % table)
         else:
-            fetch_errors = self.fetch_all()
+            fetch_errors = self.fetch_all(latest_year)
             self.munge_all()
 
         if len(fetch_errors) > 0:
             pprint(fetch_errors)
 
 
-    def fetch(self, dataset):
-        dataset.fetch()
+    def fetch(self, dataset, latest_year = False):
+        if latest_year:
+            dataset.fetch_latest()
+        else:
+            dataset.fetch()
+
         self.composed_datasets.append(dataset)
 
         return dataset.is_ready_for_use()
 
 
-    def fetch_all(self):
+    def fetch_all(self, latest_year = False):
         errors = []
 
         for dataset in self.datasets:
-            ready, err = self.fetch(dataset)
+            ready, err = self.fetch(dataset, latest_year)
             if not ready:
                 errors.append(err)
 

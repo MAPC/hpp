@@ -55,7 +55,7 @@ class Handler(SimpleHTTPRequestHandler):
             self.reload()
             return
 
-        self.composer.compose(body['munis'], body['tables'])
+        self.composer.compose(body['munis'], body['tables'], body['latest_year'])
 
         writer = self.formatWriters[body['format']](self.composer, body['include_metadata'])
         writer.write()

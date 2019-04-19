@@ -16,6 +16,4 @@ def demo_race_ethnicity_m():
     dataset.munger = munger
     dataset.layout = layout
 
-    dataset.add_condition('years', '2010')
-
     return dataset

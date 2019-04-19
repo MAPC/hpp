@@ -6,6 +6,7 @@ interpreted by the rest of the program.
 """
 
 import pandas as pd
+from pprint import pprint
 
 from ..services import prql
 
@@ -49,6 +50,21 @@ class Dataset(object):
             self.errors.append(err.response.text)
 
         return self.length
+
+
+    def fetch_latest(self):
+        try:
+            data = prql.request('SELECT DISTINCT {0} FROM tabular.{1} ORDER BY {0} DESC LIMIT 1'.format(self.year_column, self.table))
+            latest_year = data['rows'][0][self.year_column]
+
+            self.add_condition(self.year_column, latest_year)
+        except prql.Error as err:
+            self.errors.append(err.response.text)
+        except Exception as err:
+            self.errors.append(err)
+
+        self.fetch()
+        self.clear_conditions(self.year_column)
 
 
     def fetch_metadata(self):

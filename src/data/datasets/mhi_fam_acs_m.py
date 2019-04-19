@@ -17,6 +17,4 @@ def mhi_fam_acs_m():
     dataset.munger = munger
     dataset.layout = layout
 
-    dataset.add_condition('acs_year', '2012-16')
-
     return dataset
