@@ -97,10 +97,7 @@ class DataComposer(object):
             if not group in unsorted_groups:
                 unsorted_groups[group] = []
 
-            unsorted_groups[group].append({ 
-                'title': dataset.title, 
-                'source': dataset.source
-            })
+            unsorted_groups[group].append(dataset)
 
         table_groups = {}
         for group in sorted(unsorted_groups.keys()):
