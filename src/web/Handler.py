@@ -5,7 +5,8 @@ Processes requests for the web server.
 """
 
 import json
-from os import path, fstat
+import os
+from os import path, fstat, curdir, sep, getcwd
 from pprint import pprint
 from jinja2 import Template
 from urllib.parse import parse_qs
@@ -34,18 +35,39 @@ class Handler(SimpleHTTPRequestHandler):
 
         super(Handler, self).__init__(*args, **kwargs)
 
-
     def do_GET(self):
-        template_contents = convert_binary(load_file('templates', 'index.tmpl'))
-        template = Template(template_contents)
+        homepage_contents = convert_binary(load_file('templates', 'index.tmpl'))
+        homepage_template = Template(homepage_contents)
 
-        page = template.render(
+        homepage = homepage_template.render(
             munis = self.munis, 
             table_groups = self.composer.get_datasets_by_group(),
             formats = list(self.formatWriters.keys())
         )
 
-        self.send('text/html', page)
+        aboutpage_contents = convert_binary(load_file('templates', 'about.tmpl'))
+        aboutpage_template = Template(aboutpage_contents)
+
+        aboutpage = aboutpage_template.render(
+            munis = self.munis, 
+            table_groups = self.composer.get_datasets_by_group(),
+            formats = list(self.formatWriters.keys())
+        )
+        try: 
+            if self.path == "/":
+                self.send('text/html', homepage)
+            elif self.path == "/about":
+                self.send('text/html', aboutpage)
+            elif self.path.endswith(".png"):
+                f = open(curdir + "/src/web/"+self.path, mode='rb')
+                self.send_response(200)
+                self.send_header('Content-type','image/png')
+                self.end_headers()
+                self.wfile.write(f.read())
+                f.close()
+        except IOError:
+            self.send_error(404,'File Not Found: %s' % self.path)
+
 
 
     def do_POST(self):
