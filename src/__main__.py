@@ -12,7 +12,6 @@ from .writers import ExcelWriter, CSVWriter
 
 def main():
     args = parse_args(sys.argv[1:])
-
     if args['headless']:
         composer = DataComposer()
         composer.compose(args['munis'], args['tables'], args['latest_year'])
