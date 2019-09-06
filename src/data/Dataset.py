@@ -33,7 +33,6 @@ class Dataset(object):
 
         self.errors = []
 
-
     def fetch(self):
         query = self.build_query()
 
@@ -42,6 +41,10 @@ class Dataset(object):
             self.data = pd.DataFrame(data['rows'])
             self.length = len(self.data.index)
 
+          
+            if 'district' in self.data.columns:
+                self.default_condition = 'district'
+            
             sort_by_list = self.sort_by if len(self.sort_by) > 0 else [x for x in [self.default_condition, self.year_column] if x != '']
 
             if 'muni_id' in self.data.columns:
@@ -53,7 +56,7 @@ class Dataset(object):
 
             if len(sort_by_list) > 0 and sort_by.issubset(columns):
                 self.data.sort_values(by=sort_by_list, inplace=True)
-        
+
             self.data = self.data[sort_by_list + list(columns.difference(sort_by))]
 
         except prql.Error as err:
