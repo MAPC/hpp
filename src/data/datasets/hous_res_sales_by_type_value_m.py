@@ -12,7 +12,7 @@ def hous_res_sales_by_type_value_m():
 
     dataset = Dataset('hous_res_sales_by_type_value_m')
     dataset.table = 'hous_res_sales_by_type_value_m'
-    dataset.group = 'affordability'
+    dataset.group = 'demographics'
     dataset.year_column = 'sale_year'
     dataset.munger = munger
     dataset.layout = layout
