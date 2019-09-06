@@ -10,7 +10,7 @@ def hous_res_sales_by_type_value_m():
         pass
 
 
-    dataset = Dataset('hous_res_sales_by_type_value_m')
+    dataset = Dataset('Residential Home Sales by Type and Median Value (Municipal)')
     dataset.table = 'hous_res_sales_by_type_value_m'
     dataset.group = 'demographics'
     dataset.year_column = 'sale_year'
