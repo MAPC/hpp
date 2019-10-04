@@ -16,6 +16,7 @@ from .educ_enrollment_by_year_districts import educ_enrollment_by_year_districts
 from .hh_income_acs_m import hh_income_acs_m
 from .hh_tenure_by_age_acs_m import hh_tenure_by_age_acs_m
 from .hh_with_seniors_acs_m import hh_with_seniors_acs_m
+from .hous_hh_income_by_cb_chas_m import hous_hh_income_by_cb_chas_m
 from .hous_hh_income_by_hh_type_chas_m import hous_hh_income_by_hh_type_chas_m
 from .hous_hh_type_by_cb_chas_m import hous_hh_type_by_cb_chas_m
 from .hous_hh_type_size_by_seniors_m import hous_hh_type_size_by_seniors_m
@@ -44,6 +45,7 @@ data_constructors = [
     hh_tenure_by_age_acs_m,
     hh_with_seniors_acs_m,
     hous_hh_income_by_hh_type_chas_m,
+    hous_hh_income_by_cb_chas_m,
     hous_hh_type_by_cb_chas_m,
     hous_hh_type_size_by_seniors_m,
     hous_housing_units_90_10_m,

@@ -15,9 +15,9 @@ from src.util import parse_bool, strip_list
 
 load_dotenv(find_dotenv())
 
+
 def get_value(key):
     return environ.get(key, DEFAULTS.get(key))
-
 
 # Config declarations
 
