@@ -16,5 +16,6 @@ class Server(object):
         self.handler = handler
 
     def serve(self):
+
         with HTTPServer(("", config.web.PORT), self.handler) as httpd:
             return httpd.serve_forever()
