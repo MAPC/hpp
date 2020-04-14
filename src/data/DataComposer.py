@@ -10,6 +10,7 @@ from pprint import pprint
 from .Dataset import Dataset
 from .datasets import data_constructors
 from ..services import prql
+import pandas as pd;
 
 
 class DataComposer(object):
@@ -24,7 +25,7 @@ class DataComposer(object):
             table_meta[row['table_name']] = row
 
         for constructor in data_constructors:
-            self.datasets.append(constructor())    
+            self.datasets.append(constructor())
 
         for dataset in self.datasets:
             if dataset.table in table_meta:
@@ -37,8 +38,9 @@ class DataComposer(object):
             self.propogate_condition(None, muni)
 
         fetch_errors = []
+
         if tables != None:
-            for table in tables: 
+            for table in tables:
                 table_in_lowercase = table.lower()
                 dataset = [dataset for dataset in self.datasets if dataset.title.lower() == table_in_lowercase]
 
@@ -62,7 +64,12 @@ class DataComposer(object):
         else:
             dataset.fetch()
 
-        dataset.fetch_metadata() 
+        dataset.fetch_metadata()
+        # filter dataset.metadata.keys() to be only things in dataset.data.columns
+        # set = dataset.metadata.keys() & dataset.data.columns # unordered
+        ordered_columns = pd.Index(dataset.metadata.keys()) & dataset.data.columns
+        dataset.data = dataset.data[ordered_columns]
+
         self.composed_datasets.append(dataset)
 
         return dataset.is_ready_for_use()
@@ -73,6 +80,7 @@ class DataComposer(object):
 
         for dataset in self.datasets:
             ready, err = self.fetch(dataset, latest_year)
+
             if not ready:
                 errors.append(err)
 
