@@ -7,6 +7,7 @@ interpreted by the rest of the program.
 
 import pandas as pd
 from pprint import pprint
+from collections import OrderedDict
 
 from ..services import prql
 
@@ -16,10 +17,9 @@ class Dataset(object):
     def __init__(self, title = ''):
         self.title = title
         self.data = pd.DataFrame()
-        self.metadata = {}
+        self.metadata = OrderedDict()
         self.munger = None
         self.layout = None
-
         self.table = ''
         self.group = ''
         self.columns = ['*']
@@ -41,10 +41,10 @@ class Dataset(object):
             self.data = pd.DataFrame(data['rows'])
             self.length = len(self.data.index)
 
-          
+
             if 'district' in self.data.columns:
                 self.default_condition = 'district'
-            
+
             sort_by_list = self.sort_by if len(self.sort_by) > 0 else [x for x in [self.default_condition, self.year_column] if x != '']
 
             if 'muni_id' in self.data.columns:

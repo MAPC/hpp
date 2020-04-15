@@ -1,8 +1,8 @@
 # Housing Production Plan (HPP) Tool
 
-HPP has two modes: server and headless. The server mode is what is deployed to https://hpp.mapc.org, while the headless mode is intended to be used by other programs that require HPP data. 
+HPP has two modes: server and headless. The server mode is what is deployed to https://hpp.mapc.org, while the headless mode is intended to be used by other programs that require HPP data.
 
-Between the two input methods (server, headless), the program is split up into three components: 
+Between the two input methods (server, headless), the program is split up into three components:
 - **Datasets**: Describes how/what to fetch from the database and what operations to perform on the data once it has been retrieved. These datasets are constructed and orchestrated together by a DataComposer.
 - **DataComposers**: Manages the lifecycles of any declared Datasets and provides hooks into the datasets for the Writers to use.
 - **Writers**: Consumes a DataComposer and writes the DataComposer's contents to a file.
@@ -12,7 +12,7 @@ Between the two input methods (server, headless), the program is split up into t
 ##### Examples
 ```sh
 # All tables for Boston, Somerville, and Cambridge, output as .csv files
-hpp --headless -f csv "Boston, Somerville, Cambridge" 
+hpp --headless -f csv "Boston, Somerville, Cambridge"
 
 # Two tables, including metadata for each table, for Acton, output as an .xlsx file
 hpp -h -f e --include-metadata --tables="Gross Rent, Race and Ethnicity Estimates" Acton
@@ -29,7 +29,7 @@ _-\-format, -f_ : The format of the output file. Possible options: c, csv, e, ex
 
 _-\-tables, -t_ : A comma-separated string argument containing the titles of the Datasets you want to process.
 
-_-\-outpath, -o_ : An absolute path for where the output of the program should be written. The default path for headless mode is the current directory that the user is executing the command from. 
+_-\-outpath, -o_ : An absolute path for where the output of the program should be written. The default path for headless mode is the current directory that the user is executing the command from.
 
 _-\-latest_year_ : Will only grab data for the most recent year listed in each dataset.
 
@@ -39,7 +39,7 @@ _-\-latest_year_ : Will only grab data for the most recent year listed in each d
 All config options are listed in all-capped strings in _config/config.py_.
 You must assign a PrQL token to `PRQL_TOKEN` in the _.env_ file located in the project root.
 
-> __Note:__ It is not recommended to change the default configurations in the _config/defaults.py_ file when you 
+> __Note:__ It is not recommended to change the default configurations in the _config/defaults.py_ file when you
 are customizing the execution for you environment. That file is in there to ensure that
 the app is usable with little configuration. If you want to override the default configuration,
 you should override the environment variables with a _.env_ file.
@@ -48,9 +48,13 @@ you should override the environment variables with a _.env_ file.
 ##### Using Python 3.x
 ```sh
 # In project root
+mkdir src/web/compositions
 pip3 install -e .
 hpp
 ```
+
+The web server will not tell you where it is running, but it is accessible at 127.0.0.1:8001 by default.
+
 ##### With Docker + docker-compose
 ```sh
 # In project root

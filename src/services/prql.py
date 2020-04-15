@@ -2,9 +2,9 @@
 HPP Services - PrQL
 """
 
-import config 
+import config
 import requests
-
+from collections import OrderedDict
 
 def request(query):
     params = {
@@ -17,7 +17,7 @@ def request(query):
     if response.status_code != requests.codes.ok:
         raise Error(response)
 
-    return response.json()
+    return response.json(object_pairs_hook=OrderedDict)
 
 
 class Error(Exception):
