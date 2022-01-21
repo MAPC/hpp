@@ -5,22 +5,101 @@
     <title>HPP - About</title>
 
     <style>
-        body{
-            margin: 0 auto;
+        :root {
+            --bg-color-primary: aliceblue;
+            --bg-color-white: white;
+            --box-shadow: #b7d5d5;
+            --font-color-primary: #4b6eae;
+            --font-color-secondary: darkslategrey;
+            --font-color-hover: #addfda;
+            --font-family-primary: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            --font-size-large: 40px;
+            --font-size-medium: 20px;
         }
+
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            color: var(--font-color-primary);
+            font-family: var(--font-family-primary);
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
         header {
-            text-align: center;
-            margin: 0 auto;
+            align-items: center;
+            background-color: var(--bg-color-primary);
+            color: var(--font-color-primary);
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            justify-content: center;
+            padding: 2rem;
         }
+
+        h1 {
+            font-size: var(--font-size-large);
+            font-weight: normal;
+            margin: 0.5rem 0;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+            font-size: var(--font-size-medium);
+        }
+
+        a {
+            color: var(--font-color-primary);
+            text-decoration: none;
+            transition: all ease-in-out 0.2s;
+        }
+
+        a:hover {
+            color: var(--font-color-hover);
+        }
+
+        button.link {
+            background-color: var(--bg-color-primary);
+            border: solid 3px var(--font-color-primary);
+            box-shadow: 0.5rem 0.5rem var(--box-shadow);
+            color: var(--font-color-primary);
+            font-size: var(--font-size-medium);
+            margin: 1rem; 
+            padding: 1rem;
+            transition: all ease-in-out 0.4s;
+            width: 90%;
+        }
+
+        button.link:hover {
+            background-color: var(--bg-color-white);
+            box-shadow: 1rem 1rem var(--box-shadow);
+            color: var(--font-color-hover);
+            cursor: pointer;
+        }
+
         main {
             width: 60%;
-            margin: 0 auto;
+            margin: 2rem auto;
         }
-        .logo{
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        .logo {
             margin: 25px auto;
             display: flex;
             align-self: center;
             max-width: 50%;
+        }
+
+        p {
+            color: var(--font-color-secondary);
         }
 
     </style>
@@ -29,42 +108,52 @@
      <header>
         <h1>Housing Production Plan Data Tool</h1>
         <nav>
-            <a href="/">Home</a> | <a href="/about">About</a>
+            <a href="/"><button class="link">Home</button></a>
+            <a href="/about"><button class="link">About</button></a>
         </nav>
     </header>
     <main>
-        <img src="hpp-about.png" class="logo">
-        <h3>Process</h3>
+        <section>
+            <img src="hpp-about.png" class="logo">
+            <h3>Process</h3>
             <p>MAPC worked with communities to develop Housing Production Plans (HPPs) that guide the
-    type, amount, and location of new development. This tools has been designed to improve MAPC's internal process in delivering on that work. It automates the data aggression and collection process required in developing HPP’s ED fund.</p>
-
-        <h3>Goal</h3>
+            type, amount, and location of new development. This tools has been designed to improve MAPC's internal process in delivering on that work. It automates the data aggression and collection process required in developing HPP’s ED fund.</p>
+        </section> 
+        <section>
+            <h3>Goal</h3>
             <p>To help reduce the time and effort spent in the HPP production process. The Data Library’s
-    goal is automate major portions of the data extraction and transformation process required
-    to produce an HPP.</p>
-
-        <h3>Location</h3>
-            <p>Currently Data Library tool is located <a href="https://hpp.mapc.org/">HPP.MAPC.ORG</a>.</p>
-
-        <h3>How It Works</h3>
+            goal is automate major portions of the data extraction and transformation process required
+            to produce an HPP.</p>
+        </section>
+        <section>
+            <h3>Location</h3>
+            <p>Currently Data Library tool is located at <a href="https://hpp.mapc.org/">HPP.MAPC.ORG</a>.</p>
+        </section>
+        <section>
+            <h3>How It Works</h3>
             <p>The tool fetches requested data for municipalities form datasets used in the HPP process.The data is pulled from DataCommon through PrQL (SQL) requests of the database and exported
-    into formatted spreadsheets for analysts to use.</p>
-
-        <h3>How To Use</h3>
+            into formatted spreadsheets for analysts to use.</p>
+        </section>
+        <section>
+            <h3>How To Use</h3>
             <p>Make selections by clicking on locations and the tables you want to export to a spreadsheet.
-    You can also use the keyboard commands Crlt - Shift and Crlt - Click to make selections.</p>
-
-        <h3>Other Features</h3>
+            You can also use the keyboard commands Crlt - Shift and Crlt - Click to make selections.</p>
+        </section>
+        <section>
+            <h3>Other Features</h3>
             <p>We are tracking future feature request. This includes adding data like housing projections and features that standardize the comparison community selection process. Please reach out if there are features you would like to see in the tool.</p>
-
-        <h3>Next Steps</h3>
+        </section>
+        <section>
+            <h3>Next Steps</h3>
             <p>We intend to put this tool into action with the upcoming HPPs scheduled for summer 2019. We
-    will document what we learn and will use that to iteratively improve the HPP process.</p>
-
-        <h3>Get In Touch</h3>
+            will document what we learn and will use that to iteratively improve the HPP process.</p>
+        </section>
+        <section>
+            <h3>Get In Touch</h3>
             <p>Technical Questions: Ryan Kelly: <a href="mailto:rkelly@mapc.org">RKelly@mapc.org</a></p>
             <p>Data Questions: Lily Perkins-High: <a href="mailto:lperkinshigh@mapc.org">LPerkinsHigh@mapc.org</a></p>
             <p>Housing Questions: Karina Milchman: <a href="mailto:kmilchman@mapc.org">KMilchman@mapc.org</a></p>
+        </section>
     </main>
 </body>
 </html>

@@ -5,28 +5,113 @@
     <title>HPP</title>
 
     <style>
+        :root {
+            --bg-color-primary: aliceblue;
+            --bg-color-white: white;
+            --box-shadow: #b7d5d5;
+            --font-color-primary: #4b6eae;
+            --font-color-secondary: darkslategrey;
+            --font-color-hover: #addfda;
+            --font-family-primary: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            --font-size-large: 40px;
+            --font-size-medium: 20px;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
+            color: var(--font-color-primary);
+            font-family: var(--font-family-primary);
+            margin: 0;
+            padding: 0;
             text-align: center;
+            width: 100%;
+        }
+
+        header {
+            align-items: center;
+            background-color: var(--bg-color-primary);
+            /* border: solid 3px var(--font-color-primary); */
+            color: var(--font-color-primary);
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: var(--font-size-large);
+            font-weight: normal;
+            margin: 0.5rem 0;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+            font-size: var(--font-size-medium);
+        }
+
+        a {
+            color: var(--font-color-secondary);
+            text-decoration: none;
+            transition: all ease-in-out 0.2s;
+        }
+
+        a:hover {
+            color: var(--font-color-hover);
+        }
+
+        button.link {
+            background-color: var(--bg-color-primary);
+            border: solid 3px var(--font-color-primary);
+            box-shadow: 0.5rem 0.5rem var(--box-shadow);
+            color: var(--font-color-primary);
+            font-size: var(--font-size-medium);
+            margin: 1rem; 
+            padding: 1rem;
+            transition: all ease-in-out 0.4s;
+            width: 90%;
+        }
+
+        button.link:hover {
+            background-color: var(--bg-color-white);
+            box-shadow: 1rem 1rem var(--box-shadow);
+            color: var(--font-color-hover);
+            cursor: pointer;
         }
 
         form {
-            width: 850px;
+            height: auto;
             margin: 0 auto;
-
             text-align: left;
+            width: 80%;
         }
 
         .form-fields {
             display: flex; 
+            padding: 2rem;
         }
 
         .form-field {
-            flex: 1 0 27%;        
-            margin: 0 .66%;
+            flex: 1 0 27%;    
+            flex-direction: column; 
+            margin: 0 1%;
+        }
+        
+        .form-field:nth-of-type(1) {
+            flex: 1 0 15%; 
         }
 
         .form-field:nth-of-type(2) {
-            flex: 1 0 40%; 
+            flex: 1 0 50%; 
+        }
+
+        .form-field:nth-of-type(3) {
+            flex: 1 0 15%; 
         }
 
         .select-wrapper + .select-wrapper {
@@ -38,7 +123,7 @@
         }
 
         .mod-wrapper + .mod-wrapper {
-            margin-top: 1rem;
+            margin: 1rem 0;
         }
 
         small {
@@ -47,21 +132,27 @@
         }
 
         select[multiple] {
+            height: 100%;
             width: 100%;
             min-height: 10rem; 
-            overflow: auto;
+            overflow: scroll;
+            resize: both;
         }
 
         select[name="munis"] {
-            height: 100%;
-            max-height: 80vh;
-            resize: vertical;
+            height: 32rem;
+            resize: both;
+        }
+
+        select[name="format"] {
+            margin: 1rem 0;
+            width: 100%;
         }
 
         label {
             display: block;
-
-            margin-bottom: .5rem; 
+            font-size: var(--font-size-medium);
+            margin-bottom: 2rem; 
         }
 
         label[for="include_metadata"] {
@@ -69,17 +160,32 @@
         }
 
         button[type="submit"] {
-            float: right;
-
-            margin-top: 4rem; 
+            background-color: var(--bg-color-primary);
+            border: solid 3px var(--font-color-primary);
+            box-shadow: 0.5rem 0.5rem var(--box-shadow);
+            color: var(--font-color-primary);
+            font-size: var(--font-size-medium);
+            margin: 4rem auto; 
+            padding: 1rem;
+            transition: all ease-in-out 0.4s;
+            width: 90%;
         }
+
+        button[type="submit"]:hover {
+            background-color: var(--bg-color-white);
+            box-shadow: 1rem 1rem var(--box-shadow);
+            color: var(--font-color-hover);
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
     <header>
         <h1>Housing Production Plan Data Tool</h1>
         <nav>
-            <a href="/">Home</a> | <a href="/about">About</a>
+            <a href="/"><button class="link">Home</button></a>
+            <a href="/about"><button class="link">About</button></a>
         </nav>
     </header>
     <form method="POST">
@@ -124,13 +230,11 @@
                 </select>
 
                 <div class="mod-wrapper">
-                    <label for="include_metadata">Include metadata? </label>
-                    <input type="checkbox" name="include_metadata" />
+                    <input type="checkbox" name="include_metadata">Include metadata?</input>
                 </div>
 
                 <div class="mod-wrapper">
-                    <label for="latest_year">Only latest year? </label>
-                    <input type="checkbox" name="latest_year" />
+                    <input type="checkbox" name="latest_year">Only latest year?</input>
                 </div>
 
                 <button type="submit">Download Data</button>
