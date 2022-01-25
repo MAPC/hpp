@@ -10,7 +10,7 @@ def hous_hh_income_by_hh_type_chas_m():
         pass
 
 
-    dataset = Dataset('hous_hh_income_by_hh_type_chas_m')
+    dataset = Dataset('Household Income by Household Type')
     dataset.table = 'hous_hh_income_by_hh_type_chas_m'
     dataset.group = 'affordability'
     dataset.munger = munger
