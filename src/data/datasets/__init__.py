@@ -20,7 +20,7 @@ from .hous_hh_income_by_cb_chas_m import hous_hh_income_by_cb_chas_m
 from .hous_hh_income_by_hh_type_chas_m import hous_hh_income_by_hh_type_chas_m
 from .hous_hh_type_by_cb_chas_m import hous_hh_type_by_cb_chas_m
 from .hous_hh_type_size_by_seniors_m import hous_hh_type_size_by_seniors_m
-from .hous_res_sales_by_type_value_m import hous_res_sales_by_type_value_m
+# from .hous_res_sales_by_type_value_m import hous_res_sales_by_type_value_m
 from .hous_shi_m import hous_shi_m
 from .hu_tenure_by_units_acs_m import hu_tenure_by_units_acs_m
 from .hu_tenure_year_built_units_acs_m import hu_tenure_year_built_units_acs_m
@@ -47,7 +47,7 @@ data_constructors = [
     hous_hh_income_by_cb_chas_m,
     hous_hh_type_by_cb_chas_m,
     hous_hh_type_size_by_seniors_m,
-    hous_res_sales_by_type_value_m,
+    # hous_res_sales_by_type_value_m,
     hous_shi_m,
     hu_tenure_by_units_acs_m,
     hu_tenure_year_built_units_acs_m,
