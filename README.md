@@ -47,7 +47,7 @@ you should override the environment variables with a _.env_ file.
 ### Running the App
 ##### Using Python 3.x
 ```sh
-# In project root
+# In local project root
 mkdir src/web/compositions
 pip3 install -e .
 hpp
@@ -57,7 +57,7 @@ The web server will not tell you where it is running, but it is accessible at 12
 
 ##### With Docker + docker-compose
 ```sh
-# In local repo project root
+# In local project root
 docker-compose up
 ```
 
