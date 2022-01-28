@@ -37,7 +37,7 @@ _-\-latest_year_ : Will only grab data for the most recent year listed in each d
 
 ### Configuration and Environment
 All config options are listed in all-capped strings in _config/config.py_.
-You must assign a PrQL token to `PRQL_TOKEN` in the _.env_ file located in the project root.
+Create a _.env_ file in the project root and assign a PrQL token to `PRQL_TOKEN` and a port to `WEB_PORT` in the _.env_ (shared on Dashlane).
 
 > __Note:__ It is not recommended to change the default configurations in the _config/defaults.py_ file when you
 are customizing the execution for you environment. That file is in there to ensure that
@@ -53,18 +53,25 @@ pip3 install -e .
 hpp
 ```
 
-The web server will not tell you where it is running, but it is accessible at 127.0.0.1:8001 by default.
+The web server will not tell you where it is running, but it is accessible at 127.0.0.1:8081 by default.
 
 ##### With Docker + docker-compose
 ```sh
-# In project root
+# In local repo project root
 docker-compose up
 ```
 
 ### Deploying / Updating
 The current deployment of the [HPP website](https://hpp.mapc.org) uses Docker for the runtime environment.
+
+Once your SSH keys have been added to both your user and the HPP user on our production server, SSH into live and navigate to the project root on the server:
 ```sh
-# In project root on the server
+ssh youruser@live.mapc.org
+cd /var/www/hpp
+```
+
+Run the commands to deploy from the Docker container:
+```sh
 sudo git pull \
 && sudo docker-compose up -d --no-deps --build app
 ```
